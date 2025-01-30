@@ -1,1 +1,101 @@
-<p>home works!</p>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a class="navbar-brand" href="#">
+      <img src="assets/Logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
+    </a>
+  </div>
+</nav>
+
+<!-- Title Section -->
+<div class="title-container text-center bg-light py-5">
+  <h1>Automatic Risk Assessment and Mitigation Tool</h1>
+  <p>Your one-stop solution for identifying and mitigating vulnerabilities.</p>
+</div>
+<div class="spacer"></div>
+
+<!-- Search Bar -->
+<div class="container mt-4">
+  <div class="input-group w-50 mx-auto">
+    <input type="text" class="form-control" placeholder="Search vulnerabilities or reports">
+    <button class="btn btn-primary">Search</button>
+  </div>
+</div>
+
+<!-- Add space between Search and Buttons -->
+<div class="spacer my-5"></div>
+
+<!-- Buttons Section -->
+<div class="container my-4">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-end">
+      <button class="btn btn-outline-primary mx-2" (click)="navigateTo('about')">About</button>
+      <button class="btn btn-outline-success mx-2" (click)="navigateTo('services')">Services</button>
+      <button class="btn btn-outline-info mx-2" (click)="navigateTo('contact')">Contact Us</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add space between Buttons and the Box -->
+<div class="spacer"></div>
+
+<!-- Feature Boxes Section -->
+<div class="container mt-4">
+  <div class="row">
+    <!-- Check Vulnerabilities -->
+    <div class="col-md-6 d-flex justify-content-center">
+      <div class="feature-box shadow-lg p-4 rounded">
+        <i class="icon fas fa-bug"></i>
+        <h3 class="text-danger">Check Vulnerabilities</h3>
+        <p>Upload your system files to start the vulnerability scan.</p>
+        <input type="file" class="form-control mb-3">
+        <button (click)="checkVulnerabilities()">Check</button>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="col-md-6 d-flex justify-content-center">
+      <div class="feature-box shadow-lg p-4 rounded">
+        <i class="icon fas fa-bell"></i>
+        <h3 class="text-warning">Notifications</h3>
+        <p>View important security alerts.</p>
+        <button (click)="viewNotifications()">View</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <!-- Reports -->
+    <div class="col-md-6 d-flex justify-content-center">
+      <div class="feature-box shadow-lg p-4 rounded">
+        <i class="icon fas fa-chart-line"></i>
+        <h3 class="text-primary">Reports</h3>
+        <p>View and download detailed risk assessment reports.</p>
+        <button (click)="viewReports()">View</button>
+      </div>
+    </div>
+
+    <!-- Scheduling a Job -->
+    <div class="col-md-6 d-flex justify-content-center">
+      <div class="feature-box shadow-lg p-4 rounded">
+        <i class="icon fas fa-calendar-alt"></i>
+        <h3 class="text-success">Schedule a Job</h3>
+        <p>Set up automated security scans.</p>
+        <button (click)="scheduleJob()">Schedule</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <!-- History -->
+    <div class="col-md-6 d-flex justify-content-center">
+      <div class="feature-box shadow-lg p-4 rounded">
+        <i class="icon fas fa-history"></i>
+        <h3 class="text-secondary">History</h3>
+        <p>Review past vulnerability scans and reports.</p>
+        <button (click)="viewHistory()">View</button>
+      </div>
+    </div>
+  </div>
+</div>

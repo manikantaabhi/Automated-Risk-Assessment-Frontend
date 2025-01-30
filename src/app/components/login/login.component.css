@@ -1,49 +1,118 @@
-/* Center the login form */
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f8f9fa; /* Light gray background */
-  }
-  
+/* Full-page Centering */
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff); /* Light blue gradient */
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Centering the Login Box */
+.login-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15); /* Soft shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Slight Lift Effect on Hover */
+.login-container:hover {
+  transform: translate(-50%, -52%);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Title Section */
+.title-container {
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.title-container h1 {
+  color: #007bff; /* Blue Title */
+  font-family: 'Sagona', sans-serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* Form Labels - More Space Above Inputs */
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px; /* Space between label and input field */
+  color: #333;
+}
+
+/* Input Fields */
+.form-control {
+  border: 2px solid #ddd;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Input Field Focus & Hover Effects */
+.form-control:focus, .form-control:hover {
+  border-color: #1b61e2; /* Blue highlight */
+  box-shadow: 0 0 8px rgba(27, 97, 226, 0.5);
+}
+
+/* Submit Button */
+.btn-green {
+  background: linear-gradient(135deg, #5069db, #5069db);
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+}
+
+/* Button Hover Effect */
+.btn-green:hover {
+  background: linear-gradient(135deg, #6b86de, #6b86de);
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Error Messages */
+.text-danger {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Form Layout */
+/* Flexbox for Single Row Input Layout */
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px; /* Space between fields */
+}
+
+/* Adjust input width */
+.form-group input {
+  flex-grow: 1; /* Makes input field take up remaining space */
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 480px) {
   .login-container {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
   }
-  
-  .login-container:hover {
-    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.15);
-  }
-  
-  .form-control:hover {
-    border-color: #198754; /* Green highlight */
-    box-shadow: 0 0 5px rgba(25, 135, 84, 0.4);
-  }
-  
-  .btn-green {
-    background-color: #198754;
-    color: white;
-    border: none;
-  }
-  
-  .btn-green:hover {
-    background-color: #145c36;
-  }
-  
-  .form-title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #198754;
-  }
-  
-  .text-danger {
-    font-size: 12px;
-  }
-  
+}

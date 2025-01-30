@@ -1,0 +1,217 @@
+
+/* Navbar Styles */
+.navbar {
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    border-bottom: 2px solid #dee2e6;
+  }
+
+  .form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: bold;
+    color: #3555e7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Title Section */
+  .title-container {
+    margin-top: 30px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title-container h1 {
+    color: #007bff; /* Your existing color */
+    font-family: 'Sagona', sans-serif; /* Existing font family */
+    font-size: 2.5rem; /* Existing font size */
+    text-align: center; /* Explicitly centers the title text */
+    margin: 0 auto; /* Ensures proper horizontal centering */
+  }
+  
+  .title-container p {
+    font-size: 1rem; /* Smaller size for the subtitle */
+    color: #6c757d; /* Muted color for readability */
+    margin: 10px auto; /* Center the subtitle below the title */
+    text-align: center;
+  }
+  
+  /* Search Bar */
+  .input-group {
+    max-width: 600px;
+  }
+  
+  .input-group input {
+    border-radius: 20px 0 0 20px;
+    padding: 10px;
+  }
+  
+  .input-group button {
+    border-radius: 0 20px 20px 0;
+    padding: 10px;
+  }
+  
+  /* Space Between Buttons and the Feature Boxes */
+  .spacer {
+    margin-top: 50px;
+  }
+  
+  /* Feature Boxes */
+  .feature-box {
+    max-width: 350px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  /* Buttons Hover Effect */
+  button {
+    font-size: 1rem;
+    padding: 12px 24px;
+    border-radius: 8px;
+    margin: 0 10px;
+    transition: transform 0.3s, background-color 0.3s;
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+  }
+
+/* Feature Boxes */
+.feature-box {
+    max-width: 450px;
+    width: 100%;
+    border-radius: 15px; /* Modern rounded corners */
+    background: linear-gradient(135deg, #ffffff, #f8f9fa); /* Subtle gradient */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Deep shadow for floating effect */
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth hover effect */
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .feature-box:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #f8f9fa, #eef2ff); /* Slight color change */
+  }
+
+  /* Decorative Border Line */
+.feature-box:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background: linear-gradient(180deg, #b4b8bb);
+    transition: width 0.3s;
+  }
+  
+  .feature-box:hover:before {
+    width: 100%; /* Fill the box on hover */
+    height: 5px; /* Turn into a top border */
+  }
+
+  /* Icon Styling */
+.feature-box .icon {
+    font-size: 3rem;
+    color: #007bff; /* Icon color */
+    margin-bottom: 10px;
+    transition: transform 0.4s ease; /* Icon hover effect */
+  }
+  
+  .feature-box:hover .icon {
+    transform: rotate(360deg); /* Spin the icon on hover */
+    color: #bfceec; /* Change color on hover */
+  }
+  
+  /* Feature Box Titles */
+  .feature-box h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #343a40;
+  }
+  
+  /* Feature Box Descriptions */
+  .feature-box p {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 20px;
+  }
+  
+  /* Buttons Inside Boxes */
+  .feature-box button {
+    font-size: 1rem;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .feature-box button:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+  }
+  
+  /* Icons Above Titles */
+  .feature-box .icon {
+    font-size: 2.5rem; /* Large icon size */
+    color: #007bff; /* Icon color */
+    margin-bottom: 10px;
+  }
+  
+  .feature-box button:hover {
+    transform: translateY(-5px); /* Lift on hover */
+    background: linear-gradient(90deg, #6b8eff, #d7dcf0); /* Color shift */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .feature-box {
+      max-width: 100%;
+      margin-bottom: 30px;
+    }
+  } 
+  
+  /* Ensure proper spacing between rows */
+  .row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+  }
+  
+  .col-md-6 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+  
+  /* Button Hover Effect */
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Media Query for Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .feature-box {
+      max-width: 100%; /* Stack boxes vertically on smaller screens */
+    }
+  }

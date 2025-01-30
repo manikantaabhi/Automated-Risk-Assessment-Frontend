@@ -1,7 +1,12 @@
+<div class="title-container text-center bg-light py-5">
+  <h1>Automatic Risk Assessment and Mitigation Tool</h1>
+</div>
+
 <div class="login-container">
   <h1 class="form-title">Login</h1>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
+    <div class="form-group">
+      <span class="input-group-text"><i class="fas fa-user"></i></span>
       <label for="username" class="form-label">Username</label>
       <input
         type="text"
@@ -14,7 +19,8 @@
         Username is required
       </div>
     </div>
-    <div class="mb-3">
+    <div class="form-group">
+      <span class="input-group-text"><i class="fas fa-lock"></i></span>
       <label for="password" class="form-label">Password</label>
       <input
         type="password"

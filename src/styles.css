@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background: 
+        url('assets/backgroundimage.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+    color: #100202; 
+    margin: 0;
+    padding: 0;
+  }
