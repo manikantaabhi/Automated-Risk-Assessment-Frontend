@@ -1,0 +1,46 @@
+/* signup.component.css or styles.css */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa; /* Light gray background */
+  }
+  
+  .signup-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .signup-container:hover {
+    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.15); /* Highlight on hover */
+  }
+  
+  .form-control:hover {
+    border-color: #198754; /* Highlight fields on hover (green color) */
+    box-shadow: 0 0 5px rgba(25, 135, 84, 0.4);
+  }
+  
+  .btn-green {
+    background-color: #198754;
+    color: white;
+    border: none;
+  }
+  
+  .btn-green:hover {
+    background-color: #145c36;
+  }
+  
+  .form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #198754;
+  }
+  

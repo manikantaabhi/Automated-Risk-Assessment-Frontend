@@ -1,0 +1,39 @@
+<div class="login-container">
+  <h1 class="form-title">Login</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        formControlName="username"
+        placeholder="Enter your username"
+      />
+      <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="text-danger">
+        Username is required
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+        placeholder="Enter your password"
+      />
+      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+        Password is required
+      </div>
+    </div>
+    <button type="submit" class="btn btn-green w-100" [disabled]="loginForm.invalid">Login</button>
+  </form>
+
+  <!-- Response Message -->
+  <div class="mt-3">
+    <p *ngIf="responseMessage" class="text-center" [ngClass]="{'text-success': responseSuccess, 'text-danger': !responseSuccess}">
+      {{ responseMessage }}
+    </p>
+  </div>
+</div>
