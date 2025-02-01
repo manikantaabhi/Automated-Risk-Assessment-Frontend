@@ -43,7 +43,7 @@ export class LoginComponent {
         },
         (error) => {
           console.error(error);
-          this.responseMessage = 'Login failed. Please check your credentials.'+error;
+          this.responseMessage = 'Login failed. Please check your credentials.' + error;
           this.responseSuccess = false;
         }
       );
@@ -51,5 +51,9 @@ export class LoginComponent {
       this.responseMessage = 'Please fill in all required fields.';
     }
   }
-}
 
+  // Navigate to Signup Page
+  onSignup() {
+    this.router.navigate(['/signup']);  // Redirects to the Signup page
+  }
+}

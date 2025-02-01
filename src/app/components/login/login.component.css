@@ -84,6 +84,10 @@ body, html {
   width: 100%;
 }
 
+.button-spacing {
+  margin-top: 20px; /* Adjust value as needed */
+}
+
 /* Button Hover Effect */
 .btn-green:hover {
   background: linear-gradient(135deg, #6b86de, #6b86de);

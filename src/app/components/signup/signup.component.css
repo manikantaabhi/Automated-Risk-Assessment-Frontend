@@ -22,7 +22,7 @@ body, html {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-top: 50px;
+  margin-top: 150px;
 }
 
 /* Slight Lift Effect on Hover */
@@ -84,6 +84,9 @@ body, html {
   font-weight: bold;
   border-radius: 8px;
   transition: all 0.3s ease-in-out;
+}
+.button-spacing {
+  margin-top: 15px; /* Adjust value as needed */
 }
 
 /* Button Hover Effect */
