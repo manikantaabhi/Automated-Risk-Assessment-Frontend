@@ -58,4 +58,10 @@ export class HomeComponent {
         alert('Page not found!');
     }
   }
+  onLogin(page:string) {
+    if(page==='login')
+      this.router.navigate(['/login']); // Redirects to the Login page
+    else if(page ==='signup')
+      this.router.navigate(['/signup']); // Redirects to the Login page
+  }
 }
