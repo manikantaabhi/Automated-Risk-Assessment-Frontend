@@ -1,0 +1,101 @@
+/* General Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(30, 30, 30, 0.9); /* Dark transparent background */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 0px 15px rgba(0, 255, 170, 0.6); /* Neon glow effect */
+}
+
+/* Table Header */
+th {
+    background: rgba(0, 255, 170, 0.3); /* Slight glow effect */
+    color: #00ffaa;
+    font-size: 16px;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #00ffaa;
+}
+
+/* Table Rows */
+td {
+    color: #ffffff; /* White text for readability */
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Row Hover Effect */
+tr:hover {
+    background: rgba(0, 255, 170, 0.2); /* Light neon hover effect */
+    transition: 0.3s;
+}
+
+/* Links */
+td a {
+    color: #ffcc00; /* Golden yellow for contrast */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+td a:hover {
+    color: #ffaa00; /* Lighter golden on hover */
+    text-decoration: underline;
+}
+/* Stylish Heading */
+h2 {
+    text-align: center;
+    color: #ffffff; /* White color */
+    font-size: 28px;
+    text-transform: uppercase; /* Makes text uppercase */
+    letter-spacing: 2px;
+    font-weight: bold;
+    padding: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    font-family: 'Poppins', sans-serif; /* Modern font */
+}
+
+/* Underline effect */
+h2::after {
+    content: '';
+    width: 100px;
+    height: 4px;
+    background: #00ffaa; /* Neon green */
+    display: block;
+    margin: 8px auto 0;
+    border-radius: 2px;
+}
+
+/* Optional Glow Effect */
+h2:hover {
+    text-shadow: 0px 0px 8px rgba(0, 255, 170, 0.8);
+}
+
+
+/* Responsive Styling */
+@media screen and (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+    th, td {
+        padding: 8px;
+    }
+}
+.pagination-controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .pagination-controls button {
+    padding: 5px 10px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  
+  .pagination-controls select {
+    padding: 5px;
+  }
+  
