@@ -1,0 +1,57 @@
+
+<div *ngIf="vulnerabilities.length > 0">
+    <h2>Vulnerability Details</h2>
+    <!-- Search Input -->
+    <div class="search-container">
+      
+      <button (click)="checkVulnerabilities()">Check for new vulnerabilities</button>
+    </div>
+  
+    <!-- Rows Per Page Selection -->
+    <div class="pagination-controls" style="color: white;">
+        <input type="text" [(ngModel)]="searchText" (input)="calculatePagination()" placeholder="Search vulnerabilities..." />
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">&laquo; Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next &raquo;</button>
+    
+      <label for="rowsPerPage">Rows per page:</label>
+      <select [(ngModel)]="rowsPerPage" (change)="onRowsPerPageChange(rowsPerPage)">
+        <option *ngFor="let option of [5, 10, 20, 50]" [value]="option">{{ option }}</option>
+        <option [value]="totalRows">All</option>
+      </select>
+    </div>
+  
+    <!-- Table -->
+    <table>
+      <tr>
+        <th (click)="sortData('company')">Software Name</th>
+        <th (click)="sortData('version')">Version</th>
+        <th (click)="sortData('cveId')">CVE ID</th>
+        <th (click)="sortData('severity')">Severity</th>
+        <th (click)="sortData('mitigation')">Mitigation</th>
+        <th>Resource Link</th>
+      </tr>
+  
+      <tr *ngFor="let v of displayedData | filter:searchText">
+        <td>{{ v.company }}</td>
+        <td>{{ v.version }}</td>
+        <td>{{ v.cveId }}</td>
+        <td>{{ v.severity }}</td>
+        <td>{{ v.description }}</td>
+        <td>
+          <span *ngFor="let li of v.references; let i = index">
+            <a [href]="li" target="_blank">{{ li }}</a>
+            <br *ngIf="i < v.references.length - 1"> <!-- Adds a line break except for the last reference -->
+          </span>
+        </td>
+      </tr>
+    </table>
+  
+    <!-- Pagination Controls -->
+    <div class="pagination-controls">
+      <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">&laquo; Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next &raquo;</button>
+    </div>
+  </div>
+  
