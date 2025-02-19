@@ -77,9 +77,10 @@ checkVulnerabilities() {
 
   // Handle the dialog close event
   dialogRef.afterClosed().subscribe((result) => {
-    if (result === 'checked') {
-      alert('Vulnerability check initiated!');
-      // Add logic for vulnerability scanning here
+    if (result) {
+      this.vulnerabilities = result;     // ✅ Update vulnerabilities with the new data
+      this.currentPage = 1;              // Reset to the first page
+      this.calculatePagination();        // Recalculate pagination
     }
   });
 }
