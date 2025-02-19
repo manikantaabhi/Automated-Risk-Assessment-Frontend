@@ -1,5 +1,5 @@
 
-<div *ngIf="vulnerabilities.length > 0">
+<div >
     <h2>Vulnerability Details</h2>
     <!-- Search Input -->
     <div class="search-container">
@@ -23,6 +23,7 @@
   
     <!-- Table -->
     <table>
+      <thead>
       <tr>
         <th (click)="sortData('company')">Software Name</th>
         <th (click)="sortData('version')">Version</th>
@@ -31,8 +32,9 @@
         <th (click)="sortData('mitigation')">Mitigation</th>
         <th>Resource Link</th>
       </tr>
-  
-      <tr *ngFor="let v of displayedData | filter:searchText">
+  </thead>
+  <tbody *ngIf="vulnerabilities.length > 0">
+      <tr  *ngFor="let v of displayedData | filter:searchText">
         <td>{{ v.company }}</td>
         <td>{{ v.version }}</td>
         <td>{{ v.cveId }}</td>
@@ -45,6 +47,7 @@
           </span>
         </td>
       </tr>
+  </tbody>
     </table>
   
     <!-- Pagination Controls -->
