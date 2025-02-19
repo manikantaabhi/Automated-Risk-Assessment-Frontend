@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { VulnerabilityPopupComponent } from '../vulnerability-popup/vulnerability-popup.component';
 
 @Component({
   selector: 'app-home',
@@ -7,36 +9,42 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, public dialog: MatDialog) {}
 
-  // Handle "Check Vulnerabilities" button click
+  // Open the vulnerability popup
   checkVulnerabilities() {
-    alert('Vulnerability check initiated!');
-    // Add logic for vulnerability check if needed
+    const dialogRef = this.dialog.open(VulnerabilityPopupComponent, {
+      width: '100%', // Adjust width for responsiveness
+      disableClose: true, // Prevent clicking outside to close
+    });
+
+    // Handle the dialog close event
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'checked') {
+        alert('Vulnerability check initiated!');
+        // Add logic for vulnerability scanning here
+      }
+    });
   }
 
   // Function to navigate to notifications page or show alerts
   viewNotifications() {
     alert('Showing notifications...');
-    // Implement actual notification logic if needed
   }
 
   // Function to view reports
   viewReports() {
     alert('Viewing reports...');
-    // Implement report viewing logic
   }
 
   // Function to schedule a job
   scheduleJob() {
     alert('Scheduling a security scan...');
-    // Implement scheduling logic
   }
 
   // Function to view scan history
   viewHistory() {
     alert('Viewing past scans and history...');
-    // Implement history retrieval logic
   }
 
   // Navigate to specific pages
@@ -51,11 +59,17 @@ export class HomeComponent {
       case 'contact':
         alert('Navigating to Contact Us...');
         break;
-        case 'notification':
-          alert('Recent Notifications loading...');
-          break;
+      case 'notification':
+        alert('Recent Notifications loading...');
+        break;
       default:
         alert('Page not found!');
     }
+  }
+
+  // Login and Signup Navigation
+  onLogin(page: string) {
+    if (page === 'login') this.router.navigate(['/login']);
+    else if (page === 'signup') this.router.navigate(['/signup']);
   }
 }

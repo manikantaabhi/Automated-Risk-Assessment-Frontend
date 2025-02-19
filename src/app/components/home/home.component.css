@@ -1,4 +1,3 @@
-
 /* Navbar Styles */
 .navbar {
     margin-bottom: 20px;
@@ -6,32 +5,34 @@
     background-color: #ffffff;
     border-bottom: 2px solid #dee2e6;
   }
-
+  
   .form-title {
     text-align: center;
     margin-bottom: 20px;
     font-size: 26px;
     font-weight: bold;
-    color: #3555e7;
+    color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 1px;
   }
+  
   .form-control {
-    height: 50px; /* Increase height */
     font-size: 1.1rem; /* Increase font size */
     padding: 10px 15px; /* Adjust padding */
-}
+  }
+  .container {
+    padding-left: 7%;
+    padding-right: 5%;
+  }
+  
+  
   /* Title Section */
   .title-container {
-    margin-top: 30px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
   }
   
   .title-container h1 {
-    color: #007bff; /* Your existing color */
+    color: #ffffff; /* Your existing color */
     font-family: 'Sagona', sans-serif; /* Existing font family */
     font-size: 2.5rem; /* Existing font size */
     text-align: center; /* Explicitly centers the title text */
@@ -40,23 +41,17 @@
   
   .title-container p {
     font-size: 1rem; /* Smaller size for the subtitle */
-    color: #6c757d; /* Muted color for readability */
+    color: #a7b7c5; /* Muted color for readability */
     margin: 10px auto; /* Center the subtitle below the title */
     text-align: center;
   }
   
-  /* Search Bar */
-  .input-group {
-    max-width: 600px;
-  }
-  
   .input-group input {
-    border-radius: 20px 0 0 20px;
     padding: 10px;
+    width: 50%;
   }
   
   .input-group button {
-    border-radius: 0 20px 20px 0;
     padding: 10px;
   }
   
@@ -75,6 +70,9 @@
     padding: 20px;
     text-align: center;
     margin-bottom: 30px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth hover effect */
+    position: relative;
+    overflow: hidden;
   }
   
   /* Buttons Hover Effect */
@@ -94,41 +92,27 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
     position: relative;
     overflow: hidden;
-}
+  }
   
   button:hover {
     transform: scale(1.05);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   }
-
+  
   .buttons-container {
     display: flex;
     justify-content: flex-end; /* Align buttons to the right */
   }
-
-/* Feature Boxes */
-.feature-box {
-    max-width: 450px;
-    width: 100%;
-    border-radius: 15px; /* Modern rounded corners */
-    background: linear-gradient(135deg, #ffffff, #f8f9fa); /* Subtle gradient */
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Deep shadow for floating effect */
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth hover effect */
-    position: relative;
-    overflow: hidden;
-    margin-left: 100px;
-  }
   
+  /* Feature Box Hover Effect */
   .feature-box:hover {
     transform: scale(1.05); /* Slight zoom on hover */
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
     background: linear-gradient(135deg, #f8f9fa, #eef2ff); /* Slight color change */
   }
-
+  
   /* Decorative Border Line */
-.feature-box:before {
+  .feature-box:before {
     content: '';
     position: absolute;
     top: 0;
@@ -143,9 +127,9 @@
     width: 100%; /* Fill the box on hover */
     height: 5px; /* Turn into a top border */
   }
-
+  
   /* Icon Styling */
-.feature-box .icon {
+  .feature-box .icon {
     font-size: 3rem;
     color: #007bff; /* Icon color */
     margin-bottom: 10px;
@@ -199,13 +183,12 @@
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   }
   
-  /* Responsive Design */
+  /* Media Query for Mobile Responsiveness */
   @media (max-width: 768px) {
     .feature-box {
-      max-width: 100%;
-      margin-bottom: 30px;
+      max-width: 100%; /* Stack boxes vertically on smaller screens */
     }
-  } 
+  }
   
   /* Ensure proper spacing between rows */
   .row {
@@ -213,9 +196,10 @@
     flex-wrap: wrap !important;
   }
   
-  .col-md-6 {
-    flex: 0 0 50% !important;
-    max-width: 50% !important;
+  /* Adjust column width to fit 3 boxes per row */
+  .col-md-4 {
+    flex: 0 0 33.33% !important; /* 3 items per row on medium screens and larger */
+    max-width: 33.33% !important;
   }
   
   /* Button Hover Effect */
@@ -230,3 +214,4 @@
       max-width: 100%; /* Stack boxes vertically on smaller screens */
     }
   }
+  
