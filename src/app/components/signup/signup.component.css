@@ -1,115 +1,132 @@
-/* Full-page Centering */
 body, html {
   height: 100%;
   margin: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  background: linear-gradient(135deg, #e0f7fa, #ffffff); /* Light blue gradient */
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
   font-family: 'Poppins', sans-serif;
 }
 
-/* Signup Box Styling */
-.signup-container {
-  width: 100%;
-  max-width: 420px;
-  padding: 30px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15); /* Soft shadow */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin-top: 150px;
-}
-
-/* Slight Lift Effect on Hover */
-.signup-container:hover {
-  transform: translate(-50%, -52%);
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Title Styling */
 .title-container {
-  margin-top: 30px;
+  width: 100%;
   background-color: #f8f9fa;
-  border-radius: 10px;
-  padding: 30px;
+  padding: 30px 0;
+  text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .title-container h1 {
-  color: #007bff; /* Your existing color */
-  font-family: 'Sagona', sans-serif; /* Existing font family */
-  font-size: 2.5rem; /* Existing font size */
-  text-align: center; /* Explicitly centers the title text */
-  margin: 0 auto; /* Ensures proper horizontal centering */
+  color: #007bff;
+  font-family: 'Sagona', sans-serif;
+  font-size: 2.5rem;
+  margin: 0;
 }
 
-/* Input Fields */
-.form-group label {
-  display: block; /* Ensures labels are always above input fields */
-  font-weight: bold;
-  margin-bottom: 6px; /* Adds space between label and input field */
-  color: #333; /* Slightly darker color for better readability */
-}
-.form-control {
-  border: 2px solid #ddd;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: all 0.3s ease-in-out;
-}
-/* Input Field Focus & Hover Effects */
-.form-control:focus, .form-control:hover {
-  border-color: #1b61e2; /* Green highlight */
-  box-shadow: 0 0 8px rgba(25, 135, 84, 0.5);
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 120px);
 }
 
-.form-group {
+.signup-container {
+  width: 400px;
+  padding: 25px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input-group {
   display: flex;
   align-items: center;
-  margin-bottom: 0px; /* Space between fields */
+  margin-bottom: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  height: 34px;
 }
 
-/* Submit Button */
+.input-group-text {
+  background: #f8f9fa;
+  border-right: none;
+  padding: 20px 15px;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+
+.form-control {
+  border-left: none;
+  font-size: 14px;
+  height: 100%;
+  padding-left: 12px;
+  border-radius: 0;
+  width: 100%;
+  outline: none;
+}
+
+.text-danger {
+  font-size: 12px;
+  margin-top: 2px;
+  color: red;
+  font-weight: 500;
+}
+
 .btn-green {
   background: linear-gradient(135deg, #5069db, #5069db);
   color: white;
-  border: none;
-  padding: 12px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   border-radius: 8px;
   transition: all 0.3s ease-in-out;
-}
-.button-spacing {
-  margin-top: 15px; /* Adjust value as needed */
+  width: 50%;
+  padding: 10px;
+  border: none;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
 }
 
-/* Button Hover Effect */
 .btn-green:hover {
   background: linear-gradient(135deg, #6b86de, #6b86de);
   transform: scale(1.05);
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Error Messages */
-.text-danger {
-  font-size: 12px;
-  margin-top: 5px;
+.btn-outline-primary {
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 8px;
+  width: 50%;
+  padding: 8px;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
 }
 
-/* Form Layout */
-.form-group {
-  margin-bottom: 15px;
+.input-group .form-control {
+  border-right: none !important;
 }
 
-/* Responsive Design for Mobile */
-@media (max-width: 480px) {
-  .signup-container {
-      padding: 20px;
-  }
+.toggle-password {
+  cursor: pointer;
+  background: transparent;
+  border-left: none !important;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #888;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password:hover {
+  color: #555;
 }
