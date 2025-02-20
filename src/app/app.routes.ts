@@ -13,7 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
 export const routes: Routes = [
   { path: '', component: WelcomePageComponent },  // Set Welcome Page as the default route
   { path: 'signup', component: SignupComponent },
-  //{ path: '', component: ResetPasswordComponent },
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent},
