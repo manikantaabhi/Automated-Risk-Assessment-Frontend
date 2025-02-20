@@ -6,8 +6,12 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { VulnerabilityPopupComponent } from './components/vulnerability-popup/vulnerability-popup.component';
 import { DisplayVulnerabilitiesComponent } from './components/display-vulnerabilities/display-vulnerabilities.component';
+import { WelcomePageComponent } from './components/welcomepage/welcomepage.component';
+import { FooterComponent } from './components/footer/footer.component';
+
 
 export const routes: Routes = [
+  { path: '', component: WelcomePageComponent },  // Set Welcome Page as the default route
   { path: 'signup', component: SignupComponent },
   { path: '', component: SignupComponent },
   { path: 'login', component: LoginComponent },
@@ -15,5 +19,6 @@ export const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent},
   { path: 'reset-password', component: ResetPasswordComponent},
   { path: 'vulnerability', component: VulnerabilityPopupComponent },
-  { path: 'display-vulnerabilities',component: DisplayVulnerabilitiesComponent}
+  { path: 'display-vulnerabilities',component: DisplayVulnerabilitiesComponent},
+  { path: 'welcomepage', component: WelcomePageComponent },
 ];
