@@ -1,0 +1,152 @@
+<app-header (serviceSelected)="highlightService($event)"></app-header>
+
+<div class="spacer"></div>
+
+<!-- Scrolling Text Section -->
+<div class="scrolling-container">
+  <div class="scrolling-text">
+    Enhancing Cybersecurity with Automated Risk Assessments | Identify & Mitigate Vulnerabilities | Automate Risk Scanning & Stay Ahead of Threats | Protect Your Business from Cyber Attacks |
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <!-- Check Vulnerabilities -->
+    <div id="check-vulnerabilities" class="col-md-4 d-flex justify-content-center">
+      <div class="feature-box shadow-lg p-4 rounded d-flex flex-column align-items-center justify-content-between"
+        [ngClass]="{'highlight-box': selectedService === 'check-vulnerabilities'}">
+        <i class="icon fas fa-bug"></i>
+        <h3 class="text-danger">Check Vulnerabilities</h3>
+
+        <p>Upload system files to start the vulnerability scan.</p>
+
+        <button class="btn btn-secondary blurred-button"
+                [ngClass]="{'blur-effect': clickedServices['check-vulnerabilities']}" 
+                (click)="onServiceClick('check-vulnerabilities')">
+          Check
+        </button>
+
+        <p *ngIf="clickedServices['check-vulnerabilities']" class="text-danger login-message show">
+          <strong>You must log in to perform a vulnerability check.</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <div id="notifications" class="col-md-4 d-flex justify-content-center">
+      <div class="feature-box shadow-lg p-4 rounded d-flex flex-column align-items-center justify-content-between"
+        [ngClass]="{'highlight-box': selectedService === 'notifications'}">
+        <i class="icon fas fa-bell"></i>
+        <h3 class="text-warning">Notifications</h3>
+
+        <p>View important security alerts.</p>
+
+        <button class="btn btn-secondary blurred-button"
+                [ngClass]="{'blur-effect': clickedServices['notifications']}" 
+                (click)="onServiceClick('notifications')">
+          View
+        </button>
+
+        <p *ngIf="clickedServices['notifications']" class="text-danger login-message show">
+          <strong>You must log in to access notifications.</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Reports -->
+    <div id="reports" class="col-md-4 d-flex justify-content-center">
+      <div class="feature-box shadow-lg p-4 rounded d-flex flex-column align-items-center justify-content-between"
+        [ngClass]="{'highlight-box': selectedService === 'reports'}">
+        <i class="icon fas fa-chart-line"></i>
+        <h3 class="text-primary">Reports</h3>
+
+        <p>View and download risk assessment reports.</p>
+
+        <button class="btn btn-secondary blurred-button"
+                [ngClass]="{'blur-effect': clickedServices['reports']}" 
+                (click)="onServiceClick('reports')">
+          View
+        </button>
+
+        <p *ngIf="clickedServices['reports']" class="text-danger login-message show">
+          <strong>You must log in to view reports.</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="row justify-content-center mt-4">
+    <!-- Schedule a Job -->
+    <div id="schedule-job" class="col-md-4 d-flex justify-content-center">
+      <div class="feature-box shadow-lg p-4 rounded d-flex flex-column align-items-center justify-content-between"
+        [ngClass]="{'highlight-box': selectedService === 'schedule-job'}">
+        <i class="icon fas fa-calendar-alt"></i>
+        <h3 class="text-success">Schedule a Job</h3>
+
+        <p>Set up automated security scans.</p>
+
+        <button class="btn btn-secondary blurred-button"
+                [ngClass]="{'blur-effect': clickedServices['schedule-job']}" 
+                (click)="onServiceClick('schedule-job')">
+          Schedule
+        </button>
+
+        <p *ngIf="clickedServices['schedule-job']" class="text-danger login-message show">
+          <strong>You must log in to schedule a job.</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- History -->
+    <div id="history" class="col-md-4 d-flex justify-content-center">
+      <div class="feature-box shadow-lg p-4 rounded d-flex flex-column align-items-center justify-content-between"
+        [ngClass]="{'highlight-box': selectedService === 'history'}">
+        <i class="icon fas fa-history"></i>
+        <h3 class="text-secondary">History</h3>
+
+        <p>Review past vulnerability scans.</p>
+
+        <button class="btn btn-secondary blurred-button"
+                [ngClass]="{'blur-effect': clickedServices['history']}" 
+                (click)="onServiceClick('history')">
+          View
+        </button>
+
+        <p *ngIf="clickedServices['history']" class="text-danger login-message show">
+          <strong>You must log in to view history.</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Others -->
+    <div id="others" class="col-md-4 d-flex justify-content-center">
+      <div class="feature-box shadow-lg p-4 rounded d-flex flex-column align-items-center justify-content-between"
+        [ngClass]="{'highlight-box': selectedService === 'others'}">
+        <i class="icon fas fa-cogs"></i>
+        <h3 class="text-secondary">Others</h3>
+
+        <p>Other services and tools.</p>
+
+        <button class="btn btn-secondary blurred-button"
+                [ngClass]="{'blur-effect': clickedServices['others']}" 
+                (click)="onServiceClick('others')">
+          View
+        </button>
+
+        <p *ngIf="clickedServices['others']" class="text-danger login-message show">
+          <strong>You must log in to access this section.</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<!-- Footer Section -->
+<app-footer></app-footer>
+
