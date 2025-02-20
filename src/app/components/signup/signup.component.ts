@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http'; // Import HttpClient
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // Import CommonModule
-import { Router } from '@angular/router'; // Import Router
+import { HttpClient } from '@angular/common/http';
+import { FormBuilder, Validators, AbstractControl, ValidationErrors, ValidatorFn, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -10,49 +11,72 @@ import { Router } from '@angular/router'; // Import Router
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule, // Import HttpClientModule
+    HttpClientModule
   ],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  signupForm = inject(FormBuilder).group({
-    firstName: [''],
-    lastName: [''],
-    phone: [''],
-    email: [''],
-    username: [''],
-    password: [''],
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
+
+  private fb = inject(FormBuilder);
+  private http = inject(HttpClient);
+  private router = inject(Router);
+
+  private passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+    return password && confirmPassword && password !== confirmPassword ? { passwordMismatch: true } : null;
+  };
+
+  signupForm = this.fb.group({
+    firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.minLength(3)]],
+    lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+    phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+    email: ['', [Validators.required, Validators.email]],
+    username: ['', [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$')]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+    confirmPassword: ['', [Validators.required]],
     organization: ['']
-  });
+  }, { validators: this.passwordMatchValidator });
 
   responseMessage: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {} // Inject Router
-
-  // Submit form data to the API
-  onSubmit() {
-    if (this.signupForm.valid) {
-      const formData = this.signupForm.value;
-      const apiUrl = 'http://localhost:8080/api/users/signup'; // Replace with your API URL
-
-      this.http.post(apiUrl, formData).subscribe(
-        (response: any) => {
-          this.responseMessage = 'Signup successful!';
-          this.router.navigate(['/login']); // Redirect to Login page after successful signup
-        },
-        (error) => {
-          console.error(error);
-          this.responseMessage = 'Signup failed. Please try again.';
-        }
-      );
-    } else {
-      this.responseMessage = 'Please fill all required fields correctly.';
-    }
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
   }
 
-  // Navigate to Login Page
-  onLogin() {
-    this.router.navigate(['/login']); // Redirects to the Login page
+  toggleConfirmPassword(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
+  hasError(controlName: string, errorName: string): boolean {
+    const control = this.signupForm.get(controlName);
+    return !!(control?.hasError(errorName) && (control.dirty || control.touched));
+  }
+
+  onSubmit(): void {
+    if (this.signupForm.invalid) {
+      this.responseMessage = 'Please fill all required fields correctly.';
+      return;
+    }
+
+    const formData = this.signupForm.value;
+    const apiUrl = 'http://localhost:8080/api/users/signup';
+
+    this.http.post(apiUrl, formData).subscribe(
+      () => {
+        this.responseMessage = 'Signup successful!';
+        this.router.navigate(['/login']);
+      },
+      () => {
+        this.responseMessage = 'Signup failed. Please try again.';
+      }
+    );
+  }
+
+  onLogin(): void {
+    this.router.navigate(['/login']);
   }
 }
