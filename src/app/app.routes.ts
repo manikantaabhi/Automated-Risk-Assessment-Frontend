@@ -9,7 +9,7 @@ import { DisplayVulnerabilitiesComponent } from './components/display-vulnerabil
 
 export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
-  //{ path: '', component: ResetPasswordComponent },
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent},
