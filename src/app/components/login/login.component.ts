@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';  // Import HttpClient and HttpClientModule
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';  // Import CommonModule for ngIf, ngClass
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,50 +10,58 @@ import { Router } from '@angular/router';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule,  // Import HttpClientModule here
+    HttpClientModule,
+    RouterModule,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  loginForm = inject(FormBuilder).group({
-    username: ['', Validators.required],
-    password: ['', Validators.required],
-  });
-
+  loginForm: FormGroup;
   responseMessage: string = '';
   responseSuccess: boolean = false;
+  showPasswordError: boolean = false;
+  passwordFieldType: string = 'password';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required, Validators.pattern(/^[A-Za-z0-9_]+$/)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^[A-Z].*$/)]],
+    });
+  }
 
-  // Submit form data to the API
+  validatePassword() {
+    const passwordValue = this.loginForm.get('password')?.value || '';
+    this.showPasswordError = passwordValue.length < 6 || !/^[A-Z]/.test(passwordValue);
+  }
+
+  togglePasswordVisibility() {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
+
   onSubmit() {
     if (this.loginForm.valid) {
       const loginData = this.loginForm.value;
-      const apiUrl = 'http://localhost:8080/api/users/login'; // Replace with your API URL
-      console.log(loginData);
+      const apiUrl = 'http://localhost:8080/api/users/login';
 
       this.http.post(apiUrl, loginData).subscribe(
         (response: any) => {
           this.responseMessage = 'Login successful!';
           this.responseSuccess = true;
-      
-          // Redirect to home page after success
           this.router.navigate(['/home']);
         },
         (error) => {
           console.error(error);
-          this.responseMessage = 'Login failed. Please check your credentials.' + error;
+          this.responseMessage = 'Login failed. Please check your credentials.';
           this.responseSuccess = false;
         }
       );
     } else {
-      this.responseMessage = 'Please fill in all required fields.';
+      this.responseMessage = 'Please correct the errors in the form.';
     }
   }
 
-  // Navigate to Signup Page
   onSignup() {
-    this.router.navigate(['/signup']);  // Redirects to the Signup page
+    this.router.navigate(['/signup']);
   }
 }
