@@ -2,13 +2,31 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { VulnerabilityPopupComponent } from '../vulnerability-popup/vulnerability-popup.component';
+import { HeaderComponent } from '../header/header.component';
+import { CommonModule } from '@angular/common'; // Required for standalone components
+import { FooterComponent } from '../footer/footer.component'; // Import FooterComponent
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  imports: [CommonModule, HeaderComponent, FooterComponent]
 })
 export class HomeComponent {
+  selectedService: string = ''; // Tracks the highlighted service
+  clickedServices: { [key: string]: boolean } = {}; // Tracks clicked services separately
+
+    // Function to handle service button clicks
+    onServiceClick(serviceId: string) {
+      this.clickedServices = { ...this.clickedServices, [serviceId]: true };
+    }
+    // Highlight selected service for 3 seconds
+    highlightService(serviceId: string) {
+      this.selectedService = serviceId;
+      setTimeout(() => {
+        this.selectedService = ''; // Remove highlight after 3 seconds
+      }, 3000);
+    }
   constructor(private router: Router, public dialog: MatDialog) {}
 
   // Open the vulnerability popup
