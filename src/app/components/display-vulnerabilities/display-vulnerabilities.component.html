@@ -1,15 +1,14 @@
-
-<div >
-    <h2>Vulnerability Details</h2>
+<app-header (serviceSelected)="highlightService($event)"></app-header>
+<div class="container">
     <!-- Search Input -->
     <div class="search-container">
       
-      <button (click)="checkVulnerabilities()">Check for new vulnerabilities</button>
+      <button id="check-vulnerabilities" (click)="checkVulnerabilities()">Check for new vulnerabilities</button>
     </div>
   
     <!-- Rows Per Page Selection -->
-    <div class="pagination-controls" style="color: white;">
-        <input type="text" [(ngModel)]="searchText" (input)="calculatePagination()" placeholder="Search vulnerabilities..." />
+    <div class="pagination-controls">
+        <input id="search-input" type="text" [(ngModel)]="searchText" (input)="calculatePagination()" placeholder="Search vulnerabilities..." />
         <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">&laquo; Previous</button>
       <span>Page {{ currentPage }} of {{ totalPages }}</span>
       <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next &raquo;</button>
@@ -22,7 +21,7 @@
     </div>
   
     <!-- Table -->
-    <table>
+    <table id="vulnerabilities">
       <thead>
       <tr>
         <th (click)="sortData('company')">Software Name</th>
@@ -41,11 +40,18 @@
         <td>{{ v.severity }}</td>
         <td>{{ v.description }}</td>
         <td>
-          <span *ngFor="let li of v.references; let i = index">
-            <a [href]="li" target="_blank">{{ li }}</a>
-            <br *ngIf="i < v.references.length - 1"> <!-- Adds a line break except for the last reference -->
-          </span>
+          <button (click)="toggleDropdown(v)" class="toggle-btn">
+            {{ v.showReferences ? 'Hide' : 'View References' }}
+          </button>
+          <div *ngIf="v.showReferences" class="dropdown-content">
+            <ul>
+              <li *ngFor="let li of v.references">
+                <a [href]="li" target="_blank">{{ li }}</a>
+              </li>
+            </ul>
+          </div>
         </td>
+        
       </tr>
   </tbody>
     </table>
@@ -57,4 +63,5 @@
       <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next &raquo;</button>
     </div>
   </div>
-  
+  <!-- Footer Section -->
+<app-footer></app-footer>

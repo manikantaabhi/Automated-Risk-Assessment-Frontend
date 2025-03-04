@@ -1,47 +1,68 @@
 /* General Table Styling */
-table {
-    width: 100%;
+#vulnerabilities {
+    font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    background: rgba(30, 30, 30, 0.9); /* Dark transparent background */
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 0px 15px rgba(0, 255, 170, 0.6); /* Neon glow effect */
-}
+    width: 100%;
+  }
+  .container {
+    margin-top: 110px;
+  }
+  #check-vulnerabilities {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+  }
 
-/* Table Header */
-th {
-    background: rgba(0, 255, 170, 0.3); /* Slight glow effect */
-    color: #00ffaa;
-    font-size: 16px;
-    padding: 12px;
+  #search-input {
+    border-radius: 5px;
+    width: 20%;
+    padding: 8px 16px;
+    border: 2px solid #3b07e7;
+    cursor: text;
+  }
+  #vulnerabilities td, #vulnerabilities th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #vulnerabilities tr:nth-child(even){background-color: #f3f3f3;}
+  
+  #vulnerabilities tr:hover {background-color: #ddd;}
+  
+  #vulnerabilities th {
+    padding-top: 12px;
+    padding-bottom: 12px;
     text-align: left;
-    border-bottom: 2px solid #00ffaa;
-}
-
+    background-color: #5a8dee;
+    color: white;
+  }
 /* Table Rows */
 td {
-    color: #ffffff; /* White text for readability */
     padding: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
 }
 
 /* Row Hover Effect */
 tr:hover {
-    background: rgba(0, 255, 170, 0.2); /* Light neon hover effect */
+    background: rgba(59, 130, 246, 0.1); /* Light blue hover effect */
     transition: 0.3s;
 }
 
 /* Links */
 td a {
-    color: #ffcc00; /* Golden yellow for contrast */
+    color: #38bdf8; /* Bright blue for links */
     text-decoration: none;
     font-weight: bold;
 }
 
 td a:hover {
-    color: #ffaa00; /* Lighter golden on hover */
+    color: #7dd3fc; /* Lighter blue on hover */
     text-decoration: underline;
 }
+
 /* Stylish Heading */
 h2 {
     text-align: center;
@@ -72,6 +93,47 @@ h2:hover {
     text-shadow: 0px 0px 8px rgba(0, 255, 170, 0.8);
 }
 
+.toggle-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    font-size: 14px;
+  }
+  
+  .toggle-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .dropdown-content {
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  .dropdown-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdown-content li {
+    margin: 5px 0;
+  }
+  
+  .dropdown-content a {
+    color: #17a2b8;
+    text-decoration: none;
+  }
+  
+  .dropdown-content a:hover {
+    text-decoration: underline;
+  }
+  
 
 /* Responsive Styling */
 @media screen and (max-width: 768px) {
@@ -83,7 +145,6 @@ h2:hover {
     }
 }
 .pagination-controls {
-    margin-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -97,5 +158,6 @@ h2:hover {
   
   .pagination-controls select {
     padding: 5px;
+    color: black;
   }
   

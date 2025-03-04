@@ -4,11 +4,12 @@
     
     <!-- Title Centered -->
     <div class="mx-auto text-center header-title-container">
-      <a class="navbar-brand header-title">AUTOMATED RISK ASSESSMENT AND MITIGATION TOOL</a>
+      <a class="navbar-brand header-title">Automatic Risk Assessment and Mitigation Tool</a>
     </div>
 
     <!-- Buttons Right Side -->
     <div class="d-flex align-items-center buttons-right">
+      <button class="btn btn-outline-primary mx-2 small-btn" (click)="navigateTo('/')">Home</button>
       <button class="btn btn-outline-primary mx-2 small-btn" (click)="scrollToSection('about-us')">About Us</button>
 
       <!-- Services Dropdown -->
@@ -36,11 +37,10 @@
       </div>
 
       <button class="btn btn-outline-info mx-2 small-btn" (click)="scrollToSection('contact-us')">Contact Us</button>
-      <button class="btn btn-outline-info mx-2 small-btn" (click)="onLogin('login')">Login</button>
-      <button class="btn btn-outline-info mx-2 small-btn" (click)="onLogin('signup')">Signup</button>
+      <button *ngIf="!isLoggedIn" class="btn btn-outline-info mx-2 small-btn" (click)="onLogin('login')">Login</button>
+      <button *ngIf="!isLoggedIn" class="btn btn-outline-info mx-2 small-btn" (click)="onLogin('signup')">Signup</button>
+      <button class="btn btn-outline-info mx-2 small-btn" (click)="onLogout('logout')">Logout</button>
     </div>
   </div>
 </nav>
 
-<!-- Spacer to prevent content from being hidden under the fixed header -->
-<div class="header-spacer"></div>

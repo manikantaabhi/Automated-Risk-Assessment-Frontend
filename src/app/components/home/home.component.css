@@ -21,8 +21,10 @@
     padding: 10px 15px; /* Adjust padding */
   }
   .container {
+    height: 80%;
     padding-left: 7%;
     padding-right: 5%;
+    padding-top: 150px;
   }
   
   
@@ -213,5 +215,38 @@
     .feature-box {
       max-width: 100%; /* Stack boxes vertically on smaller screens */
     }
+  }
+  
+  #about-us {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #111;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .about-container {
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.5);
+  }
+  
+  h2 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  
+  #typing-text {
+    font-size: 1.2rem;
+    font-family: "Courier New", monospace;
+    border-right: 3px solid #00ffff;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    display: inline-block;
   }
   
