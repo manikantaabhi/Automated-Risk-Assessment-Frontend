@@ -5,15 +5,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FilterPipe } from '../../pipes/filter.pipe';
 import { MatDialog } from '@angular/material/dialog';
 import { VulnerabilityPopupComponent } from '../vulnerability-popup/vulnerability-popup.component';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-display-vulnerabilities',
   templateUrl: './display-vulnerabilities.component.html',
   styleUrls: ['./display-vulnerabilities.component.css'],
-  imports:[CommonModule, FormsModule, FilterPipe]
+  imports:[CommonModule, FormsModule, FilterPipe,HeaderComponent,FooterComponent]
 })
 export class DisplayVulnerabilitiesComponent {
-
+  selectedService: string = '';
   vulnerabilities: any;
   searchText: string = '';  // Variable to bind the search text
   currentPage: number = 1;  // To track the current page
@@ -25,6 +27,14 @@ export class DisplayVulnerabilitiesComponent {
     const navigation = this.router.getCurrentNavigation();
     this.vulnerabilities = navigation?.extras.state?.['vulnerabilities'] || [];
     this.calculatePagination();
+  }
+
+   // Highlight selected service for 3 seconds
+   highlightService(serviceId: string) {
+    this.selectedService = serviceId;
+    setTimeout(() => {
+      this.selectedService = ''; // Remove highlight after 3 seconds
+    }, 3000);
   }
 
   // Function to handle sorting by a specific column
@@ -67,6 +77,9 @@ export class DisplayVulnerabilitiesComponent {
            severity.includes(this.searchText.toLowerCase()) ||
            description.includes(this.searchText.toLowerCase());
   });
+}
+toggleDropdown(v: any) {
+  v.showReferences = !v.showReferences;
 }
 
 checkVulnerabilities() {

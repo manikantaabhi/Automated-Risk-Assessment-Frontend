@@ -1,6 +1,5 @@
 <app-header (serviceSelected)="highlightService($event)"></app-header>
 
-<div class="spacer"></div>
 
 <!-- Scrolling Text Section -->
 <div class="scrolling-container">
@@ -27,10 +26,6 @@
                 (click)="onServiceClick('check-vulnerabilities')">
           Check
         </button>
-
-        <p *ngIf="clickedServices['check-vulnerabilities']" class="text-danger login-message show">
-          <strong>You must log in to perform a vulnerability check.</strong>
-        </p>
       </div>
     </div>
 

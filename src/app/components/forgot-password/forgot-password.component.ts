@@ -38,6 +38,9 @@ export class ForgotPasswordComponent {
   closeResetPopup() {
     this.showPopup = false;
   }
+  backToLogin() {
+    this.router.navigate(['/login']);
+  }
 
   // Send the reset link to the backend
   sendResetLink() {
@@ -51,6 +54,7 @@ export class ForgotPasswordComponent {
         this.resetSuccess = true;
         this.resetFailed = false;
         this.errorMessage = '';  // Clear any previous errors
+        alert('Reset link sent successfully');
       },
       (error) => {
         // Handle error response
@@ -59,5 +63,6 @@ export class ForgotPasswordComponent {
         this.errorMessage = error.error || 'Error sending reset link';
       }
     );
+    this.router.navigate(['/login']);
   }
 }

@@ -8,17 +8,37 @@ import { VulnerabilityPopupComponent } from './components/vulnerability-popup/vu
 import { DisplayVulnerabilitiesComponent } from './components/display-vulnerabilities/display-vulnerabilities.component';
 import { WelcomePageComponent } from './components/welcomepage/welcomepage.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { authGuard } from './auth.guard';
 
 
 export const routes: Routes = [
-  { path: '', component: WelcomePageComponent },  // Set Welcome Page as the default route
-  { path: 'signup', component: SignupComponent },
-  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent},
-  { path: 'reset-password', component: ResetPasswordComponent},
-  { path: 'vulnerability', component: VulnerabilityPopupComponent },
-  { path: 'display-vulnerabilities',component: DisplayVulnerabilitiesComponent},
-  { path: 'welcomepage', component: WelcomePageComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { 
+    path: '', 
+    component: HomeComponent,
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'home', 
+    component: HomeComponent,
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'vulnerability', 
+    component: VulnerabilityPopupComponent,
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'display-vulnerabilities',
+    component: DisplayVulnerabilitiesComponent,
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'welcomepage', 
+    component: WelcomePageComponent,
+    canActivate: [authGuard]
+  }
 ];

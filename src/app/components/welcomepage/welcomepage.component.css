@@ -1,30 +1,23 @@
 /* Scrolling Text Container */
-.scrolling-container {
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  background-color: rgba(163, 189, 216, 0.5);;
-  padding: 5px 0;
-  position: relative;
-  backdrop-filter: blur(5px);
-}
+
 
 /* Scrolling Text */
 .scrolling-text {
   display: inline-block;
   font-size: 1rem;
-  font-weight: bold;
-  color: #f0f2f5;
+  color: #000000;
   animation: scrollText 30s linear infinite;
+  position: relative;
+  left: 50%; /* Start from middle */
 }
 
 /* Keyframe Animation for Scrolling */
 @keyframes scrollText {
   from {
-      transform: translateX(100%);
+      transform: translateX(0%);
   }
   to {
-      transform: translateX(-100%);
+      transform: translateX(-200%); /* Move twice the distance to ensure full scroll */
   }
 }
 

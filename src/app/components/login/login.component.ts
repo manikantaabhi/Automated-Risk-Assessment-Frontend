@@ -46,6 +46,8 @@ export class LoginComponent {
 
       this.http.post(apiUrl, loginData).subscribe(
         (response: any) => {
+          sessionStorage.setItem(this.loginForm.get('username')?.value, response.token);
+          sessionStorage.setItem('isLoggedIn', 'true');
           this.responseMessage = 'Login successful!';
           this.responseSuccess = true;
           this.router.navigate(['/home']);
