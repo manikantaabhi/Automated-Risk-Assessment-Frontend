@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; // Import CommonModule
 import { HttpClientModule, HttpClient } from '@angular/common/http'; // Import HttpClient
 import { Router } from '@angular/router'; // Import Router
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -28,6 +29,7 @@ export class ResetPasswordComponent {
   // Inject HttpClient into the component
   private http = inject(HttpClient);
   private router = inject(Router); // Optional: Inject Router if you want to navigate after resetting
+  constructor(private loadingService:LoadingService) {}
 
   // Validate new password
   validatePassword() {
@@ -68,6 +70,7 @@ export class ResetPasswordComponent {
 
   // Handle form submission (e.g., API call to reset password)
   sendResetRequest() {
+    this.loadingService.startLoading();
     if (this.isSubmitDisabled) return;
     console.log("submitting");
     const apiUrl = 'http://localhost:8080/api/users/reset-password'; // Your backend API URL
@@ -80,6 +83,7 @@ export class ResetPasswordComponent {
     }, { responseType: 'text' })  // Force response as text
     .subscribe(
       (response) => {
+        this.loadingService.stopLoading();
         console.log("Response received:", response);
         alert("Success: " + response);
         this.resetSuccess = true;
@@ -88,6 +92,7 @@ export class ResetPasswordComponent {
         this.router.navigate(['/login']);
       },
       (error) => {
+        this.loadingService.stopLoading();
         alert(error);
         // Handle error response
         this.resetSuccess = false;
