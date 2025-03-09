@@ -9,6 +9,7 @@ import { DisplayVulnerabilitiesComponent } from './components/display-vulnerabil
 import { WelcomePageComponent } from './components/welcomepage/welcomepage.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { authGuard } from './auth.guard';
+import { HistoryComponent } from './components/history/history.component';
 
 
 export const routes: Routes = [
@@ -40,5 +41,11 @@ export const routes: Routes = [
     path: 'welcomepage', 
     component: WelcomePageComponent,
     canActivate: [authGuard]
+  },
+  { 
+    path: 'history', 
+    component: HistoryComponent,
+    canActivate: [authGuard]
   }
+
 ];

@@ -50,6 +50,7 @@ export class LoginComponent {
         (response: any) => {
           this.loadingService.stopLoading();
           // Show OTP popup
+          
           const otpPopup = document.createElement('div');
           otpPopup.style.position = 'fixed';
           otpPopup.style.top = '50%';
@@ -60,7 +61,6 @@ export class LoginComponent {
           otpPopup.style.borderRadius = '8px';
           otpPopup.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
           otpPopup.style.zIndex = '1000';
-
 
           const otpInput = document.createElement('input');
           otpInput.type = 'text';
@@ -98,6 +98,7 @@ export class LoginComponent {
                 if(twoFactorResponse.success) {
           sessionStorage.setItem(this.loginForm.get('username')?.value, response.token);
           sessionStorage.setItem('isLoggedIn', 'true');
+          sessionStorage.setItem('username', this.loginForm.get('username')?.value);
           this.responseMessage = 'Login successful!';
           this.responseSuccess = true;
           this.router.navigate(['/home']);
@@ -117,6 +118,7 @@ export class LoginComponent {
 
         },
         (error) => {
+          this.loadingService.stopLoading();
           console.error(error);
           this.responseMessage = 'Login failed. Please check your credentials.';
           this.responseSuccess = false;

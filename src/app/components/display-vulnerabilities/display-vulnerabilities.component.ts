@@ -7,12 +7,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { VulnerabilityPopupComponent } from '../vulnerability-popup/vulnerability-popup.component';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-display-vulnerabilities',
   templateUrl: './display-vulnerabilities.component.html',
   styleUrls: ['./display-vulnerabilities.component.css'],
-  imports:[CommonModule, FormsModule, FilterPipe,HeaderComponent,FooterComponent]
+  imports:[CommonModule, FormsModule, FilterPipe, HeaderComponent, FooterComponent,HttpClientModule]
 })
 export class DisplayVulnerabilitiesComponent {
   selectedService: string = '';
@@ -22,93 +24,115 @@ export class DisplayVulnerabilitiesComponent {
   rowsPerPage: number = 10; // Default rows per page
   totalRows: number = 0;    // Total rows in the dataset (filtered)
   totalPages: number = 0;   // Total pages, calculated dynamically
-
-  constructor(private router: Router,public dialog:MatDialog) {
+  
+  constructor(private router: Router, public dialog: MatDialog, private http: HttpClient, private loadingService:LoadingService) {
     const navigation = this.router.getCurrentNavigation();
     this.vulnerabilities = navigation?.extras.state?.['vulnerabilities'] || [];
+    this.vulnerabilities = this.vulnerabilities.map((v: any) => ({ ...v, selected: false })); // Add 'selected' property
     this.calculatePagination();
   }
 
-   // Highlight selected service for 3 seconds
-   highlightService(serviceId: string) {
+  highlightService(serviceId: string) {
     this.selectedService = serviceId;
     setTimeout(() => {
       this.selectedService = ''; // Remove highlight after 3 seconds
     }, 3000);
   }
 
-  // Function to handle sorting by a specific column
   sortData(key: string) {
     this.vulnerabilities.sort((a: any, b: any) => {
       if (a[key] < b[key]) return -1;
       if (a[key] > b[key]) return 1;
       return 0;
     });
-    this.calculatePagination(); // Recalculate pagination when sorting
+    this.calculatePagination();
   }
 
-  // Function to change the rows per page
   onRowsPerPageChange(value: number) {
     this.rowsPerPage = value;
-    this.calculatePagination(); // Recalculate pagination when rows per page changes
-    this.currentPage = 1; // Reset to the first page
+    this.calculatePagination();
+    this.currentPage = 1;
   }
 
-  // Function to calculate pagination based on filtered data
   calculatePagination() {
-    const filteredData = this.getFilteredData(); // Get filtered data based on search text
-    this.totalRows = filteredData.length; // Set the total number of rows based on filtered data
-    this.totalPages = Math.ceil(this.totalRows / this.rowsPerPage); // Calculate total pages
+    const filteredData = this.getFilteredData();
+    this.totalRows = filteredData.length;
+    this.totalPages = Math.ceil(this.totalRows / this.rowsPerPage);
   }
 
-  // Function to get filtered data based on search text
- getFilteredData() {
-  return this.vulnerabilities.filter((v: any) => {
-    // Handle undefined or null values for each field
-    const softwareName = v.softwareName ? v.softwareName.toLowerCase() : '';
-    const version = v.version ? v.version.toLowerCase() : '';
-    const cveId = v.cveId ? v.cveId.toLowerCase() : '';
-    const severity = v.severity ? v.severity.toLowerCase() : '';
-    const description = v.description ? v.description.toLowerCase() : '';
+  getFilteredData() {
+    return this.vulnerabilities.filter((v: any) => {
+      const softwareName = v.softwareName ? v.softwareName.toLowerCase() : '';
+      const version = v.version ? v.version.toLowerCase() : '';
+      const cveId = v.cveId ? v.cveId.toLowerCase() : '';
+      const severity = v.severity ? v.severity.toLowerCase() : '';
+      const description = v.description ? v.description.toLowerCase() : '';
+      return softwareName.includes(this.searchText.toLowerCase()) || 
+             version.includes(this.searchText.toLowerCase()) || 
+             cveId.includes(this.searchText.toLowerCase()) ||
+             severity.includes(this.searchText.toLowerCase()) ||
+             description.includes(this.searchText.toLowerCase());
+    });
+  }
 
-    return softwareName.includes(this.searchText.toLowerCase()) || 
-           version.includes(this.searchText.toLowerCase()) || 
-           cveId.includes(this.searchText.toLowerCase()) ||
-           severity.includes(this.searchText.toLowerCase()) ||
-           description.includes(this.searchText.toLowerCase());
-  });
-}
-toggleDropdown(v: any) {
-  v.showReferences = !v.showReferences;
-}
+  toggleDropdown(v: any) {
+    v.showReferences = !v.showReferences;
+  }
 
-checkVulnerabilities() {
-  const dialogRef = this.dialog.open(VulnerabilityPopupComponent, {
-    width: '100%', // Adjust width for responsiveness
-    disableClose: true, // Prevent clicking outside to close
-  });
+  checkVulnerabilities() {
+    const dialogRef = this.dialog.open(VulnerabilityPopupComponent, {
+      width: '100%',
+      disableClose: true,
+    });
 
-  // Handle the dialog close event
-  dialogRef.afterClosed().subscribe((result) => {
-    if (result) {
-      this.vulnerabilities = result;     // ✅ Update vulnerabilities with the new data
-      this.currentPage = 1;              // Reset to the first page
-      this.calculatePagination();        // Recalculate pagination
-    }
-  });
-}
-  // Function to calculate the data to display for the current page
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.vulnerabilities = result;
+        this.currentPage = 1;
+        this.calculatePagination();
+      }
+    });
+  }
+
   get displayedData() {
-    const filteredData = this.getFilteredData(); // Filter the data based on search text
+    const filteredData = this.getFilteredData();
     const startIndex = (this.currentPage - 1) * this.rowsPerPage;
     const endIndex = startIndex + this.rowsPerPage;
-    return filteredData.slice(startIndex, endIndex); // Slice the filtered data based on current page and rows per page
+    return filteredData.slice(startIndex, endIndex);
   }
 
-  // Function to handle page changes
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
     }
   }
+
+  // Save selected vulnerabilities to the database
+  saveSelected() {
+    this.loadingService.startLoading();
+    const selectedVulnerabilities = this.vulnerabilities.filter((v: any) => v.selected);
+    
+    if (selectedVulnerabilities.length === 0) {
+      alert('No vulnerabilities selected!');
+      return;
+    }
+  
+    const requestPayload = {
+      username:sessionStorage.getItem('username'),
+      vulnerabilities: selectedVulnerabilities
+    };
+    console.log(requestPayload);
+    this.http.post('http://localhost:8080/api/vulnerabilities/save-vulnerabilities', requestPayload).subscribe(
+      () => {
+        this.loadingService.stopLoading()
+        alert('Selected vulnerabilities saved successfully!')
+      },
+      (error) => {
+        console.log(error)
+        this.loadingService.stopLoading()
+        alert("Error: "+error.error.message)
+      }
+    );
+  }
+  
 }

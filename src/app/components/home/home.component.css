@@ -250,3 +250,34 @@
     display: inline-block;
   }
   
+  .about-us-container {
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 4rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .about-us-content {
+    width: 80%;
+    max-width: 1200px;
+    text-align: center;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-title {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  .about-text {
+    color: #555;
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }

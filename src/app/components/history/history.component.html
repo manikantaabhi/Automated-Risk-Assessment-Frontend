@@ -1,12 +1,5 @@
-<app-header (serviceSelected)="highlightService($event)"></app-header>
+<app-header></app-header>
 <div class="container">
-    <!-- Search Input -->
-    <div class="search-container">
-      
-      <button id="check-vulnerabilities" (click)="checkVulnerabilities()">Check for new vulnerabilities</button>
-      <p>Vulnerability Data</p>
-    </div>
-  
     <!-- Rows Per Page Selection -->
     <div class="pagination-controls">
         <input id="search-input" type="text" [(ngModel)]="searchText" (input)="calculatePagination()" placeholder="Search vulnerabilities..." />
@@ -35,7 +28,7 @@
         </tr>
       </thead>
       <tbody *ngIf="vulnerabilities.length > 0">
-        <tr *ngFor="let v of displayedData | filter:searchText">
+        <tr *ngFor="let v of historyData | filter:searchText">
           <td>
             <input type="checkbox" [(ngModel)]="v.selected" />
           </td>
@@ -51,7 +44,7 @@
             <div *ngIf="v.showReferences" class="dropdown-content">
               <ul>
                 <li *ngFor="let li of v.references">
-                  <a [href]="li" target="_blank">{{ li }}</a>
+                  <a [href]="li.referenceLink" target="_blank">{{ li.referenceLink }}</a>
                 </li>
               </ul>
             </div>
@@ -60,7 +53,7 @@
       </tbody>
     </table>
     
-    <button (click)="saveSelected()" class="save-btn">Save Selected</button>
+    <button (click)="clear()" class="save-btn">Save Selected</button>
     
   
     <!-- Pagination Controls -->
@@ -70,5 +63,4 @@
       <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next &raquo;</button>
     </div>
   </div>
-  <!-- Footer Section -->
 <app-footer></app-footer>

@@ -62,8 +62,9 @@ export class HomeComponent {
 
   // Function to view scan history
   viewHistory() {
-    alert('Viewing past scans and history...');
+    this.router.navigate(['/history']); // Navigate to HistoryComponent
   }
+  
 
   // Navigate to specific pages
   navigateTo(page: string) {
