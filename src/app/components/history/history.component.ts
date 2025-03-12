@@ -32,7 +32,7 @@ export class HistoryComponent implements OnInit {
   }
 
   fetchHistoryData(): void {
-    const apiUrl = 'http://localhost:8080/api/vulnerabilities/history/mani';
+    const apiUrl = 'http://localhost:8080/api/vulnerabilities/history/'+sessionStorage.getItem("username");
     
 
     this.http.get<any>(apiUrl).subscribe(
