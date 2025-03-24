@@ -1,46 +1,32 @@
-<!-- Improved Fixed Header using Bootstrap -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow header-frozen">
-  <div class="container-fluid d-flex justify-content-between align-items-center">
-    
+<nav class="navbar">
+  <div [ngClass]="getHeaderClass()" class="header-container">
     <!-- Title Centered -->
-    <div class="mx-auto text-center header-title-container">
-      <a class="navbar-brand header-title">Automatic Risk Assessment and Mitigation Tool</a>
+    <div>
+      <p class="title">Automatic Risk Assessment and Mitigation Tool</p>
     </div>
 
     <!-- Buttons Right Side -->
-    <div class="d-flex align-items-center buttons-right">
-      <button class="btn btn-outline-primary mx-2 small-btn" (click)="navigateTo('/')">Home</button>
-      <button class="btn btn-outline-primary mx-2 small-btn" (click)="scrollToSection('about-us')">About Us</button>
+    <div class="menu-options">
+      <button (click)="navigateTo('/')">Home</button>
+      <button (click)="scrollToSection('about-us')">About Us</button>
 
       <!-- Services Dropdown -->
-      <div class="dropdown position-relative">
-        <button class="btn btn-outline-primary mx-2 small-btn" (click)="toggleDropdown($event)">
-          Services
-        </button>
-        <ul class="dropdown-menu enhanced-dropdown-menu shadow-lg" [class.show]="isDropdownOpen">
-          <li><a class="dropdown-item" (click)="scrollToService('check-vulnerabilities')">
-            <i class=" me-2"></i> Check Vulnerabilities
-          </a></li>
-          <li><a class="dropdown-item" (click)="scrollToService('notifications')">
-            <i class="text-warning me-2"></i> Notifications
-          </a></li>
-          <li><a class="dropdown-item" (click)="scrollToService('reports')">
-            <i class=" text-primary me-2"></i> Reports
-          </a></li>
-          <li><a class="dropdown-item" (click)="scrollToService('schedule-job')">
-            <i class="text-success me-2"></i> Schedule a Job
-          </a></li>
-          <li><a class="dropdown-item" (click)="scrollToService('history')">
-            <i class=" text-secondary me-2"></i> History
-          </a></li>
+      <div>
+        <button (click)="toggleDropdown($event)">Services</button>
+        <ul [class.show]="isDropdownOpen">
+          <li><a (click)="checkVulnerabilities()">Check Vulnerabilities</a></li>
+          <li><a (click)="scrollToService('notifications')">Notifications</a></li>
+          <li><a (click)="scrollToService('reports')">Reports</a></li>
+          <li><a (click)="scrollToService('schedule-job')">Schedule a Job</a></li>
+          <li><a (click)="viewHistory()">History</a></li>
         </ul>
       </div>
 
-      <button class="btn btn-outline-info mx-2 small-btn" (click)="scrollToSection('contact-us')">Contact Us</button>
-      <button *ngIf="!isLoggedIn" class="btn btn-outline-info mx-2 small-btn" (click)="onLogin('login')">Login</button>
-      <button *ngIf="!isLoggedIn" class="btn btn-outline-info mx-2 small-btn" (click)="onLogin('signup')">Signup</button>
-      <button class="btn btn-outline-info mx-2 small-btn" (click)="onLogout('logout')">Logout</button>
+      <button (click)="scrollToSection('contact-us')">Contact Us</button>
+      <button *ngIf="!isLoggedIn" (click)="onLogin('login')">Login</button>
+      <button *ngIf="!isLoggedIn" (click)="onLogin('signup')">Signup</button>
+      <button (click)="onLogout('logout')">Logout</button>
+      <div class="profile-pic"><p class="profile-pic-para">{{username.slice(0,1)}}</p></div>
     </div>
   </div>
 </nav>
-

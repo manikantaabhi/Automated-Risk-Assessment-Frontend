@@ -4,13 +4,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { VulnerabilityPopupComponent } from '../vulnerability-popup/vulnerability-popup.component';
 import { HeaderComponent } from '../header/header.component';
 import { CommonModule } from '@angular/common'; // Required for standalone components
-import { FooterComponent } from '../footer/footer.component'; // Import FooterComponent
-
+import { FooterComponent } from '../footer/footer.component';
+import { MarqueeComponent } from "../marquee/marquee.component"; // Import FooterComponent
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CommonModule, HeaderComponent, FooterComponent]
+  imports: [CommonModule, HeaderComponent, FooterComponent, MarqueeComponent]
 })
 export class HomeComponent {
   selectedService: string = ''; // Tracks the highlighted service

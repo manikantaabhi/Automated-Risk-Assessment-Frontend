@@ -14,9 +14,9 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    max-width: 1200px;
-    margin: auto;
     padding: 20px;
+    justify-content: space-evenly;
+    margin: 0 5vw;
 }
 
 .footer-sections {
@@ -24,7 +24,6 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    max-width: 1200px;
     margin: auto;
     padding: 10px 0;
 }
@@ -75,11 +74,11 @@
 }
 
 .social-icons a:hover {
-    color: #18439a;
+    color: hsl(220, 73%, 35%);
 }
 
 .footer-bottom {
-    background-color: #6c757d;
+    background-color:hsl(220, 73%, 30%);;
     color: #ffffff;
     text-align: center;
     font-size: 0.9rem;

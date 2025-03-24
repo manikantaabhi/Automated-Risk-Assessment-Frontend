@@ -1,5 +1,5 @@
 <app-header (serviceSelected)="highlightService($event)"></app-header>
-
+<app-marquee></app-marquee>
 <div class="container"> 
     <div class="row d-flex justify-content-center"> <!-- Centered row -->
       <!-- Check Vulnerabilities -->
@@ -79,6 +79,21 @@
       <button class="learn-more">Learn More</button>
     </div>
   </section>
+  <hr>
+  <section class="about-section about">
+    <div class="background-overlay"></div>
+    <div class="content" data-aos="fade-up">
+      <h2>About Us</h2>
+      <hr>
+      <p class="about-para">
+        Our System is designed to help organizations proactively identify and mitigate cybersecurity threats.
+        By analyzing an organization’s computing assets, our system automatically scans the National Vulnerability Database (NVD)
+        and other security sources to detect potential risks.
+      </p>
+      <button class="learn-more">Learn More</button>
+    </div>
+  </section>
+
 
 <!-- Footer Section -->
 <app-footer></app-footer>

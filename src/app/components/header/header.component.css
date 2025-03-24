@@ -1,403 +1,124 @@
-/* Fixed Sticky Header with Blur Effect */
-.header-frozen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 10%;
-  z-index: 1050;
-  background: rgba(255, 255, 255, 0.1); /* Transparent White */
-  backdrop-filter: blur(10px); /* Blur Effect */
-  -webkit-backdrop-filter: blur(30px); /* Safari Support */
-  box-shadow: 0 4px 10px rgba(87, 121, 201, 0.2);
-  padding: 15px 20px;
-  border-bottom: 1px solid rgba(92, 131, 209, 0.2); /* Subtle Border */
-}
-/* Title Styling - White & Bold */
-.header-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #007bff; /* White color */
-    text-align: center;
-    margin: 0;
-    display: block;
-    padding-right:80px; /* Ensures spacing from buttons */
-    font-family: Open Sans;
-}
-.company-name {
-  font-family: 'Poppins', sans-serif;
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #0ff; /* Neon Cyan */
-  text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #00ffff, 0 0 40px #00ffff;
-  letter-spacing: 2px;
-  padding: 10px 20px;
-  display: inline-block;
-}
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .company-name {
-    font-size: 1.8rem;
-  }
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0px 10px;
+  
+  /* Adding a shadow for a floating effect */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  
+  /* Optional: Adding a slight 3D effect with transform */
+  transform: translateY(-5px);
+  
+  /* Optional: Adding a smooth transition for hover effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 9999;
 }
 
 
-/* Prevent Content from Being Overlapped by Navbar */
-.header-spacer {
-    margin-top: 100px; /* Adjust based on navbar height */
-}
-
-/* Navbar Buttons */
-.navbar .btn {
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 6px;
-    transition: all 0.3s ease-in-out;
-}
-
-/* Ensure Space Between Title & Buttons */
-.header-title-container {
-    margin-right: 0px; /* Adjust this for space between title and buttons */
-}
-
-.buttons-right {
-    margin-left: auto !important;  /* Ensures buttons move to the right */
-    display: flex;
-    justify-content: flex-end;
-    font-family: Open Sans;
-}
-
-/* Additional Margin Between Title & Buttons */
-.me-5 {
-    width: 60px;  /* Increase to adjust spacing */
-}
-
-/* Button Effects */
-.navbar .btn-outline-light {
-    border-color: #ffffff;
-    color: #ffffff;
-}
-
-.navbar .btn-outline-light:hover {
-    background-color: #ffffff;
-    color: #333;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 992px) {
-    .header-frozen {
-        padding: 10px 15px;
-    }
-
-    .header-title {
-        font-size: 1.4rem; /* Reduce size for mobile screens */
-    }
-
-    .header-spacer {
-        margin-top: 90px;
-    }
-
-    .navbar .btn {
-        font-size: 0.9rem;
-        padding: 8px 14px;
-    }
-}
-
-/* Enhanced Dropdown Button */
-.enhanced-dropdown-btn {
-  padding: 12px 18px;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: all 0.3s ease-in-out;
-  background-color: #6074da;
+.profile-pic{
+  width:50px;
+  height: 50px;
+  background-color: black;
+  margin: 0;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
   color: white;
-  border: none;
+  justify-content: center;
+  align-items: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2rem;
+  text-transform: capitalize;
 }
-.enhanced-dropdown-btn:hover {
-  background-color: #3755bf;
-}
-
-/* Enhanced Dropdown Menu */
-.enhanced-dropdown-menu {
-  display: none;
-  position: absolute;
-  background: white;
-  border-radius: 8px;
-  padding: 12px 0;
-  min-width: 230px;
-  transform: translateY(-10px);
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15);
-  list-style: none; /* Removes default bullets */
-  background: #d8e5f3;
-  padding: 10px;
+.profile-pic-para{
+  margin: 0;
 }
 
-/* Show dropdown when class is active */
-.enhanced-dropdown-menu.show {
-  display: block;
-  transform: translateY(0);
-  opacity: 1;
-}
-.enhanced-dropdown-menu li a {
-  color: #343a40;
-  font-size: 1rem;
-  padding: 10px;
+.menu-options{
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.title{
+  color: #007bff;;
+  font-size: 2vw;
+  font-weight: bolder;
 }
 
-.enhanced-dropdown-menu li a:hover {
-  background: #7986d3;
+
+/* Dropdown Button */
+div {
+  position: relative;
+}
+
+/* Base button style */
+button {
+  background-color:#007bff;
+  color: white;
+  padding: 10px 20px;  /* Vertical and horizontal padding (adjust for height and width) */
+  border: none;
   border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  width: auto;  /* Width automatically adjusts based on content */
+  height: 35px; /* Height adjusts based on content */
+  display: inline-block;  /* To make the button only as wide as its content */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect */
+button:hover {
+  background-color: #2980b9;
+  transform: translateY(-5px);  /* Lift effect */
+}
+
+/* Active effect */
+button:active {
+  background-color: #1c6ea4;
+  transform: translateY(0);  /* Button pressed down */
+}
+
+
+/* Dropdown Menu */
+ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0px;
+  margin: 0;
+  transition: opacity 0.1s ease;
+  width: 200px;
+  background-color: white;
+}
+
+ul.show {
+  display: block;
 }
 
 /* Dropdown Items */
-.dropdown-item {
-  font-size: 1rem;
-  padding: 12px 18px;
-  transition: all 0.3s ease-in-out;
-  display: flex;
-  align-items: center;
+li {
+  padding: 10px 20px;
+}
+li:hover{
+  background-color: hsl(0, 0%, 90%);
 }
 
-/* Hover Effect */
-.dropdown-item:hover {
-  background-color: #007bff;
-  color: white;
+a {
+  color: #0056b3;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+a:hover{
+  font-weight: bolder;
+  cursor: pointer;
 }
 
-/* Icon Adjustments */
-.dropdown-item i {
-  font-size: 1.2rem;
-  min-width: 25px;
-}
-
-/* Hover Effect */
-.dropdown-item:hover {
-  background-color: #007bff;
-  color: white;
-}
-
-/* Smooth Fade Animation */
-@keyframes fadeInDropdown {
-  from {
-      transform: translateY(-10px);
-      opacity: 0;
-  }
-  to {
-      transform: translateY(0);
-      opacity: 1;
-  }
-}
-
-/* Navbar Styles */
-.navbar {
-    padding: 10px 15px;
-    background-color: #ffffff;
-    border-bottom: 2px solid #dee2e6;
-  }
-  
-  .form-title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 26px;
-    font-weight: bold;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  
-  .form-control {
-    font-size: 1.1rem; /* Increase font size */
-    padding: 10px 15px; /* Adjust padding */
-  }
-  .container {
-    padding-left: 7%;
-    padding-right: 5%;
-  }
-  
-  
-  /* Title Section */
-  .title-container {
-    padding: 20px;
-    
-  }
-  
-  .title-container h1 {
-    color: #eeeaea; /* Your existing color */
-    font-family: 'Sagona', sans-serif; /* Existing font family */
-    font-size: 2.5rem; /* Existing font size */
-    text-align: center; /* Explicitly centers the title text */
-    margin: 0 auto; /* Ensures proper horizontal centering */
-  }
-  
-  .title-container p {
-    font-size: 1rem; /* Smaller size for the subtitle */
-    color: #a7b7c5; /* Muted color for readability */
-    margin: 10px auto; /* Center the subtitle below the title */
-    text-align: center;
-  }
-  
-  .input-group input {
-    padding: 10px;
-    width: 50%;
-  }
-  
-  .input-group button {
-    padding: 10px;
-  }
-  
-  /* Space Between Buttons and the Feature Boxes */
-  .spacer {
-    margin-top: 50px;
-  }
-  
-  /* Feature Boxes */
-  .feature-box {
-    max-width: 350px;
-    width: 100%;
-    border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 30px;
-    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth hover effect */
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /* Buttons Hover Effect */
-  button {
-    font-size: 1rem;
-    margin: 0 10px;
-    border: none;
-    cursor: pointer;
-    letter-spacing: 1px;
-    color: #2d64bb;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  button:hover {
-    text-decoration: underline;
-  }
-  
-  .buttons-container {
-    display: flex;
-    justify-content: flex-end; /* Align buttons to the right */
-  }
-  /* Buttons */
-  .small-btn {
-    font-size: 0.9rem !important; /* Reduce font size */
-    padding: 5px 12px !important; /* Reduce padding */
-    border-radius: 5px !important; /* Slightly round edges */
-    min-width: 100px; /* Prevents buttons from becoming too small */
-}
-
-  
-  /* Feature Box Hover Effect */
-  .feature-box:hover {
-    transform: scale(1.05); /* Slight zoom on hover */
-    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(135deg, #f8f9fa, #eef2ff); /* Slight color change */
-  }
-  
-  /* Decorative Border Line */
-  .feature-box:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 5px;
-    background: linear-gradient(180deg, #b4b8bb);
-    transition: width 0.3s;
-  }
-  
-  .feature-box:hover:before {
-    width: 100%; /* Fill the box on hover */
-    height: 5px; /* Turn into a top border */
-  }
-  
-  
-  /* Feature Box Titles */
-  .feature-box h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #343a40;
-  }
-  
-  /* Feature Box Descriptions */
-  .feature-box p {
-    font-size: 1rem;
-    color: #6c757d;
-    margin-bottom: 20px;
-  }
-  
-  /* Buttons Inside Boxes */
-  .feature-box button {
-    font-size: 1rem;
-    padding: 12px 20px;
-    border-radius: 8px;
-    border: none;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .feature-box button:hover {
-    transform: scale(1.05); /* Slight zoom on hover */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
-  }
-  
-  /* Icons Above Titles */
-  .feature-box .icon {
-    font-size: 2.5rem; /* Large icon size */
-    color: #007bff; /* Icon color */
-    margin-bottom: 10px;
-  }
-  
-  .feature-box button:hover {
-    transform: translateY(-5px); /* Lift on hover */
-    background: linear-gradient(90deg, #6b8eff, #d7dcf0); /* Color shift */
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-  }
-  
- /* Adjust Button Spacing for Mobile */
-@media (max-width: 768px) {
-  .small-btn {
-      font-size: 0.8rem !important;
-      padding: 5px 10px !important;
-  }
-
-  .enhanced-dropdown-btn {
-      font-size: 0.8rem !important;
-      padding: 5px 10px !important;
-  }
-}
-  
-  /* Ensure proper spacing between rows */
-  .row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-  }
-  
-  /* Adjust column width to fit 3 boxes per row */
-  .col-md-4 {
-    flex: 0 0 33.33% !important; /* 3 items per row on medium screens and larger */
-    max-width: 33.33% !important;
-  }
-  
-  /* Media Query for Mobile Responsiveness */
-  @media (max-width: 768px) {
-    .feature-box {
-      max-width: 100%; /* Stack boxes vertically on smaller screens */
-    }
-  }
-  

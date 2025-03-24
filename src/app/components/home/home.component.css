@@ -24,7 +24,6 @@
     height: 80%;
     padding-left: 7%;
     padding-right: 5%;
-    padding-top: 150px;
   }
   
   
@@ -339,4 +338,23 @@
 
   .learn-more:hover {
     background-color: #0056b3;
+  }
+
+  .content{
+    padding: 30px 15px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  }
+  .about{
+    background-color: hsl(0, 1%, 82%);
+    color: black;
+  }
+
+  .about .content{
+    color: black;
+    padding: 100px;
+    border-radius: 50%;
+  }
+  .about-para{
+    color: whitesmoke;
+    font-size: 1.5rem;
   }

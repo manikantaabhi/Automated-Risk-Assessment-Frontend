@@ -17,7 +17,7 @@ export class HeaderComponent {
   @Output() serviceSelected = new EventEmitter<string>(); // Emits selected service to WelcomeComponent
   isDropdownOpen = false; // Tracks dropdown state
   isLoggedIn = false;  // Add this property
-
+  username:any;
   lastScrollY = 0;
   isHeaderVisible = true;
   // Listen to the window scroll event
@@ -43,6 +43,7 @@ export class HeaderComponent {
 
   constructor(private router: Router,public dialog: MatDialog) {
     this.isLoggedIn =true;
+    this.username=sessionStorage.getItem("username");
   }
 
   // Toggle dropdown visibility

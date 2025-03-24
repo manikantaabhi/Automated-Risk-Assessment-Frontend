@@ -1,0 +1,25 @@
+.marquee-container {
+    width: 100%;
+    overflow: hidden;  /* Hide content that's out of the container's bounds */
+    position: relative;
+  }
+  p{
+    color: red;
+    font-size: 1.5rem;
+  }
+  .marquee-content {
+    display: inline-block;
+    white-space: nowrap;  /* Prevent the content from wrapping */
+    animation: marquee 10s linear infinite;  /* Scroll content horizontally */
+  }
+  
+  /* Animation to scroll the content from right to left */
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);  /* Start off-screen on the right */
+    }
+    100% {
+      transform: translateX(-100%); /* End off-screen on the left */
+    }
+  }
+  
