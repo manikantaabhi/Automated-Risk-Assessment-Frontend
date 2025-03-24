@@ -29,8 +29,8 @@
           <th (click)="sortData('company')">Software Name</th>
           <th (click)="sortData('version')">Version</th>
           <th (click)="sortData('cveId')">CVE ID</th>
-          <th (click)="sortData('severity')">Severity</th>
-          <th (click)="sortData('mitigation')">Mitigation</th>
+          <th (click)="sortData('metrics.severity')">Severity</th>
+          <th (click)="sortData('description')">Mitigation</th>
           <th>Resource Link</th>
         </tr>
       </thead>
@@ -39,10 +39,12 @@
           <td>
             <input type="checkbox" [(ngModel)]="v.selected" />
           </td>
-          <td>{{ v.company }}</td>
-          <td>{{ v.version }}</td>
+          <td>{{ inputData.productName }}</td>
+          <td>{{ inputData.version }}</td>
           <td>{{ v.cveId }}</td>
-          <td>{{ v.severity }}</td>
+          <td><p *ngFor="let met of v.metrics">
+            {{met.severity}}
+          </p>
           <td>{{ v.description }}</td>
           <td>
             <button (click)="toggleDropdown(v)" class="toggle-btn">
@@ -51,7 +53,7 @@
             <div *ngIf="v.showReferences" class="dropdown-content">
               <ul>
                 <li *ngFor="let li of v.references">
-                  <a [href]="li" target="_blank">{{ li }}</a>
+                  <a [href]="li" target="_blank">{{ li.url }}</a>
                 </li>
               </ul>
             </div>

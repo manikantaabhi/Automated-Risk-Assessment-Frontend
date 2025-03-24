@@ -19,15 +19,19 @@ import { LoadingService } from '../../services/loading.service';
 export class DisplayVulnerabilitiesComponent {
   selectedService: string = '';
   vulnerabilities: any;
+  inputData: any;
   searchText: string = '';  // Variable to bind the search text
   currentPage: number = 1;  // To track the current page
   rowsPerPage: number = 10; // Default rows per page
   totalRows: number = 0;    // Total rows in the dataset (filtered)
   totalPages: number = 0;   // Total pages, calculated dynamically
-  
-  constructor(private router: Router, public dialog: MatDialog, private http: HttpClient, private loadingService:LoadingService) {
+  sortKey: string = ''; // To track the key to sort
+  sortOrder: string = 'asc'; // Ascending or descending order
+
+  constructor(private router: Router, public dialog: MatDialog, private http: HttpClient, private loadingService: LoadingService) {
     const navigation = this.router.getCurrentNavigation();
     this.vulnerabilities = navigation?.extras.state?.['vulnerabilities'] || [];
+    this.inputData = navigation?.extras.state?.['inputData'] || [];
     this.vulnerabilities = this.vulnerabilities.map((v: any) => ({ ...v, selected: false })); // Add 'selected' property
     this.calculatePagination();
   }
@@ -39,14 +43,49 @@ export class DisplayVulnerabilitiesComponent {
     }, 3000);
   }
 
+  // Sort function that handles any key (softwareName, version, cveId, etc.)
   sortData(key: string) {
+    if (this.sortKey === key) {
+      // Toggle sort order if the same column is clicked
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      // Set default to ascending order when a new column is clicked
+      this.sortOrder = 'asc';
+    }
+    this.sortKey = key;
+  
     this.vulnerabilities.sort((a: any, b: any) => {
-      if (a[key] < b[key]) return -1;
-      if (a[key] > b[key]) return 1;
-      return 0;
+      let comparison = 0;
+  
+      // Handle sorting for nested properties like metrics.severity
+      if (key === 'metrics.severity') {
+        // Access severity from the first element of the metrics array
+        const severityA = a.metrics && a.metrics.length > 0 ? a.metrics[0].severity : '';
+        const severityB = b.metrics && b.metrics.length > 0 ? b.metrics[0].severity : '';
+        
+        // Compare severity values
+        if (severityA < severityB) {
+          comparison = -1;
+        } else if (severityA > severityB) {
+          comparison = 1;
+        }
+      } else {
+        // Default sorting for other properties (e.g., cveId, description)
+        const aValue = a[key];
+        const bValue = b[key];
+        if (aValue < bValue) {
+          comparison = -1;
+        } else if (aValue > bValue) {
+          comparison = 1;
+        }
+      }
+  
+      return this.sortOrder === 'asc' ? comparison : -comparison;
     });
+  
     this.calculatePagination();
   }
+  
 
   onRowsPerPageChange(value: number) {
     this.rowsPerPage = value;
@@ -60,20 +99,30 @@ export class DisplayVulnerabilitiesComponent {
     this.totalPages = Math.ceil(this.totalRows / this.rowsPerPage);
   }
 
+  // Filter data based on search input (across all relevant columns)
   getFilteredData() {
     return this.vulnerabilities.filter((v: any) => {
+      const searchText = this.searchText.toLowerCase().trim();
+  
       const softwareName = v.softwareName ? v.softwareName.toLowerCase() : '';
       const version = v.version ? v.version.toLowerCase() : '';
       const cveId = v.cveId ? v.cveId.toLowerCase() : '';
-      const severity = v.severity ? v.severity.toLowerCase() : '';
       const description = v.description ? v.description.toLowerCase() : '';
-      return softwareName.includes(this.searchText.toLowerCase()) || 
-             version.includes(this.searchText.toLowerCase()) || 
-             cveId.includes(this.searchText.toLowerCase()) ||
-             severity.includes(this.searchText.toLowerCase()) ||
-             description.includes(this.searchText.toLowerCase());
+  
+      // Extract severity from all metrics objects, join them into a string for searching
+      const severityList = v.metrics && v.metrics.length > 0 
+        ? v.metrics.map((m: any) => m.severity ? m.severity.toLowerCase().trim() : '').join(' ') 
+        : '';
+  
+      return softwareName.includes(searchText) || 
+             version.includes(searchText) || 
+             cveId.includes(searchText) ||
+             severityList.includes(searchText) ||  // Now filters based on all severity values
+             description.includes(searchText);
     });
   }
+  
+  
 
   toggleDropdown(v: any) {
     v.showReferences = !v.showReferences;
@@ -86,20 +135,24 @@ export class DisplayVulnerabilitiesComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.vulnerabilities = result;
-        this.currentPage = 1;
-        this.calculatePagination();
-      }
+      this.vulnerabilities = result.vulnerabilities || result; // Ensure it's accessing the right key
+      this.inputData = result.inputData || []; // Capture inputData
+      this.currentPage = 1;
+      this.calculatePagination();
     });
   }
 
   get displayedData() {
-    const filteredData = this.getFilteredData();
+    const filteredData = this.getFilteredData(); // Ensure filtering happens first
+    this.totalRows = filteredData.length; // Update total count dynamically
+    this.totalPages = Math.ceil(this.totalRows / this.rowsPerPage); // Recalculate pages
+  
     const startIndex = (this.currentPage - 1) * this.rowsPerPage;
     const endIndex = startIndex + this.rowsPerPage;
-    return filteredData.slice(startIndex, endIndex);
+  
+    return filteredData.slice(startIndex, endIndex); // Apply pagination correctly
   }
+  
 
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
@@ -111,28 +164,27 @@ export class DisplayVulnerabilitiesComponent {
   saveSelected() {
     this.loadingService.startLoading();
     const selectedVulnerabilities = this.vulnerabilities.filter((v: any) => v.selected);
-    
     if (selectedVulnerabilities.length === 0) {
       alert('No vulnerabilities selected!');
+      this.loadingService.stopLoading();
       return;
     }
-  
+
+    const cveIds = selectedVulnerabilities.map((x: any) => x.cveId);
     const requestPayload = {
-      username:sessionStorage.getItem('username'),
-      vulnerabilities: selectedVulnerabilities
+      username: sessionStorage.getItem('username'),
+      cveId: cveIds
     };
-    console.log(requestPayload);
+
     this.http.post('http://localhost:8080/api/vulnerabilities/save-vulnerabilities', requestPayload).subscribe(
       () => {
-        this.loadingService.stopLoading()
-        alert('Selected vulnerabilities saved successfully!')
+        this.loadingService.stopLoading();
+        alert('Selected vulnerabilities saved successfully!');
       },
       (error) => {
-        console.log(error)
-        this.loadingService.stopLoading()
-        alert("Error: "+error.error.message)
+        this.loadingService.stopLoading();
+        alert("Error: " + error.error.message);
       }
     );
   }
-  
 }

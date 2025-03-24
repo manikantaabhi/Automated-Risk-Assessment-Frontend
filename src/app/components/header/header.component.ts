@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { authGuard } from '../../auth.guard';
 
+import { MatDialog } from '@angular/material/dialog';
+import { VulnerabilityPopupComponent } from '../vulnerability-popup/vulnerability-popup.component';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -15,7 +18,30 @@ export class HeaderComponent {
   isDropdownOpen = false; // Tracks dropdown state
   isLoggedIn = false;  // Add this property
 
-  constructor(private router: Router) {
+  lastScrollY = 0;
+  isHeaderVisible = true;
+  // Listen to the window scroll event
+  @HostListener('window:scroll', ['$event'])
+  onScroll(): void {
+    const currentScrollY = window.scrollY;
+
+    // If the user scrolls up, show the header; if down, hide it
+    if (currentScrollY < this.lastScrollY) {
+      this.isHeaderVisible = true;  // Show header on scroll up
+    } else {
+      this.isHeaderVisible = false; // Hide header on scroll down
+    }
+
+    // Update the last scroll position
+    this.lastScrollY = currentScrollY;
+  }
+
+  // Return the visibility class for the header
+  getHeaderClass() {
+    return this.isHeaderVisible ? 'show' : '';
+  }
+
+  constructor(private router: Router,public dialog: MatDialog) {
     this.isLoggedIn =true;
   }
 
@@ -61,5 +87,24 @@ export class HeaderComponent {
   onLogout(type: string) {
     sessionStorage.clear();
     this.router.navigate(['/login']); // Navigate to login/signup page
+  }
+  
+  checkVulnerabilities() {
+      const dialogRef = this.dialog.open(VulnerabilityPopupComponent, {
+        width: '100%', // Adjust width for responsiveness
+        disableClose: true, // Prevent clicking outside to close
+      });
+  
+      // Handle the dialog close event
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result === 'checked') {
+          alert('Vulnerability check initiated!');
+          // Add logic for vulnerability scanning here
+        }
+      });
+    }
+
+  viewHistory() {
+    this.router.navigate(['/history']); // Navigate to HistoryComponent
   }
 }

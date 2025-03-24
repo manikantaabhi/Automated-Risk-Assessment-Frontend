@@ -50,6 +50,42 @@ export class HistoryComponent implements OnInit {
     );
   }
 
+  deleteSelected(): void {
+    const selectedCveIds = this.historyData
+      .filter((v: any) => v.selected)
+      .map((v: any) => v.cveId);
+  
+    if (selectedCveIds.length === 0) {
+      alert("Please select at least one vulnerability to delete.");
+      return;
+    }
+  
+    const apiUrl = `http://localhost:8080/api/vulnerabilities/history/delete?username=${sessionStorage.getItem("username")}`;
+    
+    this.http.request('DELETE', apiUrl, { 
+      body: selectedCveIds, 
+      responseType: 'text'  // Expect a text response
+    }).subscribe(
+      (response) => {
+        alert(response); // Show the success message
+  
+        // 🔥 Remove deleted vulnerabilities from the local list (UI update)
+        this.historyData = this.historyData.filter((v: any) => !v.selected);
+        this.vulnerabilities = this.vulnerabilities.filter((v: any) => !v.selected);
+  
+        // 🔄 Recalculate pagination
+        this.calculatePagination();
+      },
+      (error) => {
+        console.error("Error deleting vulnerabilities:", error);
+        alert("Failed to delete vulnerabilities.");
+      }
+    );
+  }
+  
+  
+  
+
   toggleDropdown(history: any): void {
     history.showReferences = !history.showReferences;
   }
