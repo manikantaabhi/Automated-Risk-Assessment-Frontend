@@ -1,0 +1,56 @@
+/* Container for the page */
+.container {
+  margin: 20px;
+  padding: 20px;
+}
+
+/* Page title */
+h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+/* Form styling */
+form div {
+  margin-bottom: 10px;
+}
+
+form label {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+form input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+}
+
+/* Button styling */
+button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* List styling */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+}
