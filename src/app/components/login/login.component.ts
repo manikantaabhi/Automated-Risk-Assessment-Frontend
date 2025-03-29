@@ -24,7 +24,7 @@ export class LoginComponent {
   showPasswordError: boolean = false;
   passwordFieldType: string = 'password';
 
-  constructor(private http: HttpClient, private router: Router, private fb: FormBuilder,private loadingService:LoadingService) {
+  constructor(private http: HttpClient, private router: Router, private fb: FormBuilder, private loadingService: LoadingService) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.pattern(/^[A-Za-z0-9_]+$/)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^[A-Z].*$/)]],
@@ -61,7 +61,6 @@ export class LoginComponent {
           otpPopup.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
           otpPopup.style.zIndex = '1000';
 
-
           const otpInput = document.createElement('input');
           otpInput.type = 'text';
           otpInput.placeholder = 'Enter OTP';
@@ -87,20 +86,21 @@ export class LoginComponent {
           submitButton.onclick = () => {
             const otp = otpInput.value;
             const twoFactorUrl = 'http://localhost:8080/api/users/2fa/verify';
-            
-            this.http.post(twoFactorUrl, { 
+
+            this.http.post(twoFactorUrl, {
               username: this.loginForm.get('username')?.value,
-              otp: otp 
+              otp: otp
             }).subscribe(
               (twoFactorResponse: any) => {
                 this.loadingService.stopLoading();
                 document.body.removeChild(otpPopup);
                 if(twoFactorResponse.success) {
-          sessionStorage.setItem(this.loginForm.get('username')?.value, response.token);
-          sessionStorage.setItem('isLoggedIn', 'true');
-          this.responseMessage = 'Login successful!';
-          this.responseSuccess = true;
-          this.router.navigate(['/home']);
+                  // Save the userId from the twoFactorResponse instead of response
+                  sessionStorage.setItem('userId', twoFactorResponse.userId);
+                  sessionStorage.setItem('isLoggedIn', 'true');
+                  this.responseMessage = 'Login successful!';
+                  this.responseSuccess = true;
+                  this.router.navigate(['/home']);
                 } else {
                   this.responseMessage = 'Invalid OTP. Please try again.';
                   this.responseSuccess = false;

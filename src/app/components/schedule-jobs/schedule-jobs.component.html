@@ -1,0 +1,43 @@
+<div class="container">
+  <h2>Scheduled Jobs</h2>
+
+  <!-- Form to create a new scheduled job -->
+  <form (submit)="createJob(); $event.preventDefault()">
+    <div>
+      <label for="jobName">Job Name:</label>
+      <input type="text" id="jobName" [(ngModel)]="newJob.jobName" name="jobName" required>
+    </div>
+    <div>
+      <label for="vendor">Vendor:</label>
+      <input type="text" id="vendor" [(ngModel)]="newJob.vendor" name="vendor" required>
+    </div>
+    <div>
+      <label for="productName">Product Name:</label>
+      <input type="text" id="productName" [(ngModel)]="newJob.productName" name="productName" required>
+    </div>
+    <div>
+      <label for="version">Version:</label>
+      <input type="text" id="version" [(ngModel)]="newJob.version" name="version" required>
+    </div>
+    <div>
+      <label for="keywords">Keywords:</label>
+      <input type="text" id="keywords" [(ngModel)]="newJob.keywords" name="keywords" required>
+    </div>
+    <button type="submit">Schedule Job</button>
+  </form>
+
+  <!-- List of scheduled jobs -->
+  <div *ngIf="jobs && jobs.length > 0">
+    <h3>Your Scheduled Jobs</h3>
+    <ul>
+      <li *ngFor="let job of jobs">
+        <strong>{{ job.jobName }} - {{ job.vendor }} - {{ job.productName }} ({{ job.version }})</strong><br>
+        Keywords: {{ job.keywords }}<br>
+        <button (click)="cancelJob(job.id!)">Cancel</button>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="jobs.length === 0">
+    <p>No scheduled jobs found.</p>
+  </div>
+</div>

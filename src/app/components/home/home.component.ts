@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { VulnerabilityPopupComponent } from '../vulnerability-popup/vulnerability-popup.component';
 import { HeaderComponent } from '../header/header.component';
-import { CommonModule } from '@angular/common'; // Required for standalone components
-import { FooterComponent } from '../footer/footer.component'; // Import FooterComponent
+import { CommonModule } from '@angular/common';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-home',
@@ -16,18 +16,20 @@ export class HomeComponent {
   selectedService: string = ''; // Tracks the highlighted service
   clickedServices: { [key: string]: boolean } = {}; // Tracks clicked services separately
 
-    // Function to handle service button clicks
-    onServiceClick(serviceId: string) {
-      this.clickedServices = { ...this.clickedServices, [serviceId]: true };
-    }
-    // Highlight selected service for 3 seconds
-    highlightService(serviceId: string) {
-      this.selectedService = serviceId;
-      setTimeout(() => {
-        this.selectedService = ''; // Remove highlight after 3 seconds
-      }, 3000);
-    }
   constructor(private router: Router, public dialog: MatDialog) {}
+
+  // Function to handle service button clicks
+  onServiceClick(serviceId: string) {
+    this.clickedServices = { ...this.clickedServices, [serviceId]: true };
+  }
+
+  // Highlight selected service for 3 seconds
+  highlightService(serviceId: string) {
+    this.selectedService = serviceId;
+    setTimeout(() => {
+      this.selectedService = ''; // Remove highlight after 3 seconds
+    }, 3000);
+  }
 
   // Open the vulnerability popup
   checkVulnerabilities() {
@@ -45,9 +47,9 @@ export class HomeComponent {
     });
   }
 
-  // Function to navigate to notifications page or show alerts
+  // Navigate to notifications page
   viewNotifications() {
-    alert('Showing notifications...');
+    this.router.navigate(['/notifications']);
   }
 
   // Function to view reports
@@ -55,9 +57,9 @@ export class HomeComponent {
     alert('Viewing reports...');
   }
 
-  // Function to schedule a job
+  // Navigate to schedule jobs page
   scheduleJob() {
-    alert('Scheduling a security scan...');
+    this.router.navigate(['/schedule-jobs']);
   }
 
   // Function to view scan history
