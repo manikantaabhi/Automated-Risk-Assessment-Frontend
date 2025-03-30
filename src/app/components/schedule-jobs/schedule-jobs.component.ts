@@ -84,4 +84,8 @@ export class ScheduleJobsComponent implements OnInit {
       (error: any) => console.error('Error canceling job', error)
     );
   }
+
+  goHome(): void {
+    this.router.navigate(['/home']);
+  }
 }
