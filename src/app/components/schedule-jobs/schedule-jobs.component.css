@@ -1,56 +1,149 @@
-/* Container for the page */
-.container {
-  margin: 20px;
+:host {
+  display: block;
+  font-family: 'Orbitron', sans-serif;
+  background-color: #121212;
+  color: #e0e0e0;
   padding: 20px;
 }
 
-/* Page title */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #121212; /* Uniform background color */
+}
+
+header {
+  position: relative; /* For home icon positioning */
+  border-bottom: 2px solid #1e88e5;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
 h2 {
-  font-size: 24px;
-  margin-bottom: 15px;
+  font-size: 2em;
+  margin: 0 0 10px 0;
 }
 
-/* Form styling */
-form div {
-  margin-bottom: 10px;
-}
-
-form label {
-  font-weight: bold;
-  display: inline-block;
-  margin-right: 10px;
-}
-
-form input {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-  max-width: 300px;
-}
-
-/* Button styling */
-button {
-  padding: 8px 12px;
-  background-color: #007bff;
+.home-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
   border: none;
-  color: #fff;
-  border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
+.home-icon svg {
+  width: 24px;
+  height: 24px;
 }
 
-/* List styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+input[type="text"] {
+  width: 100%;
+  box-sizing: border-box; /* Ensures the padding and border are included in the width */
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  font-size: 1.2em; /* Increased font size for text fields */
+  font-family: 'Orbitron', sans-serif;
+}
+
+button.btn,
+button.cancel-btn {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1em;
+}
+
+button.btn {
+  background-color: #1e88e5;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+button.btn:hover {
+  background-color: #1565c0;
+}
+
 ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
-ul li {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+li {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  padding: 15px;
   margin-bottom: 10px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row; /* Job details and actions are on the same row */
+  justify-content: space-between;
+  align-items: flex-start; /* Align items at the top */
+}
+
+.job-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Allow job details to take up available space */
+}
+
+.job-title {
+  font-size: 1.2em;
+  margin: 0;
+  font-weight: bold;
+}
+
+.job-info {
+  margin: 5px 0 0 0;
+  font-size: 0.9em;
+  color: #9e9e9e;
+}
+
+.job-keywords {
+  margin: 5px 0 0 0;
+  font-size: 0.9em;
+  color: #9e9e9e;
+}
+
+.job-actions {
+  margin-left: 20px;
+  align-self: flex-start; /* Ensure the cancel button aligns with the top of job details */
+}
+
+button.cancel-btn {
+  background-color: #e53935;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.cancel-btn:hover {
+  background-color: #d32f2f;
+}
+
+.no-data {
+  font-size: 1.2em;
+  text-align: center;
+  padding: 40px 0;
+  color: #757575;
 }

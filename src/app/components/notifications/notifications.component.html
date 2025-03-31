@@ -1,19 +1,31 @@
 <div class="container">
-  <h2>Notifications</h2>
-  <div class="button-group">
-    <button (click)="refreshNotifications()">Refresh</button>
-    <button (click)="goHome()">Home</button>
-  </div>
+  <header>
+    <h2>Notifications</h2>
+    <button class="home-icon" (click)="goHome()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+      </svg>
+    </button>
+    <div class="button-group">
+      <button (click)="refreshNotifications()">Refresh</button>
+    </div>
+  </header>
 
-  <div *ngIf="notifications && notifications.length > 0; else noNotifications">
+  <section *ngIf="notifications && notifications.length > 0; else noNotifications">
     <ul>
       <li *ngFor="let note of notifications">
-        <strong>{{ note.message }}</strong> - {{ note.createdAt | date:'short' }}
-        <button (click)="markAsRead(note)">Read</button>
+        <div class="notification-item">
+          <div class="message">
+            <strong>{{ note.message }}</strong>
+            <span class="date">{{ note.createdAt | date:'short' }}</span>
+          </div>
+          <button class="read-btn" (click)="markAsRead(note)">Mark as Read</button>
+        </div>
       </li>
     </ul>
-  </div>
+  </section>
+
   <ng-template #noNotifications>
-    <p>No notifications found.</p>
+    <p class="no-data">No notifications found.</p>
   </ng-template>
 </div>

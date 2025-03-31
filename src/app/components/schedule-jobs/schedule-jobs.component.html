@@ -1,29 +1,36 @@
 <div class="container">
-  <h2>Scheduled Jobs</h2>
+  <header>
+    <h2>Scheduled Jobs</h2>
+    <button class="home-icon" (click)="goHome()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+      </svg>
+    </button>
+  </header>
 
   <!-- Form to create a new scheduled job -->
   <form (submit)="createJob(); $event.preventDefault()">
-    <div>
+    <div class="form-group">
       <label for="jobName">Job Name:</label>
       <input type="text" id="jobName" [(ngModel)]="newJob.jobName" name="jobName" required>
     </div>
-    <div>
+    <div class="form-group">
       <label for="vendor">Vendor:</label>
       <input type="text" id="vendor" [(ngModel)]="newJob.vendor" name="vendor" required>
     </div>
-    <div>
+    <div class="form-group">
       <label for="productName">Product Name:</label>
       <input type="text" id="productName" [(ngModel)]="newJob.productName" name="productName" required>
     </div>
-    <div>
+    <div class="form-group">
       <label for="version">Version:</label>
       <input type="text" id="version" [(ngModel)]="newJob.version" name="version" required>
     </div>
-    <div>
+    <div class="form-group">
       <label for="keywords">Keywords:</label>
       <input type="text" id="keywords" [(ngModel)]="newJob.keywords" name="keywords" required>
     </div>
-    <button type="submit">Schedule Job</button>
+    <button type="submit" class="btn">Schedule Job</button>
   </form>
 
   <!-- List of scheduled jobs -->
@@ -31,13 +38,18 @@
     <h3>Your Scheduled Jobs</h3>
     <ul>
       <li *ngFor="let job of jobs">
-        <strong>{{ job.jobName }} - {{ job.vendor }} - {{ job.productName }} ({{ job.version }})</strong><br>
-        Keywords: {{ job.keywords }}<br>
-        <button (click)="cancelJob(job.id!)">Cancel</button>
+        <div class="job-details">
+          <p class="job-title">{{ job.jobName }}</p>
+          <p class="job-info">{{ job.vendor }} - {{ job.productName }} ({{ job.version }})</p>
+          <p class="job-keywords">Keywords: {{ job.keywords }}</p>
+        </div>
+        <div class="job-actions">
+          <button class="btn cancel-btn" (click)="cancelJob(job.id!)">Cancel</button>
+        </div>
       </li>
     </ul>
   </div>
   <div *ngIf="jobs.length === 0">
-    <p>No scheduled jobs found.</p>
+    <p class="no-data">No scheduled jobs found.</p>
   </div>
 </div>
