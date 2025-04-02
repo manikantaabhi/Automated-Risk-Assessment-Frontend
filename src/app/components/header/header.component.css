@@ -14,7 +14,7 @@
   
   /* Optional: Adding a smooth transition for hover effect */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  z-index: 9999;
+  z-index: 2;
 }
 
 

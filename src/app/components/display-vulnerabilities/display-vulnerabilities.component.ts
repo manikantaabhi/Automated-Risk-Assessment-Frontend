@@ -9,12 +9,13 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoadingService } from '../../services/loading.service';
+import { MarqueeComponent } from "../marquee/marquee.component";
 
 @Component({
   selector: 'app-display-vulnerabilities',
   templateUrl: './display-vulnerabilities.component.html',
   styleUrls: ['./display-vulnerabilities.component.css'],
-  imports:[CommonModule, FormsModule, FilterPipe, HeaderComponent, FooterComponent,HttpClientModule]
+  imports: [CommonModule, FormsModule, FilterPipe, HeaderComponent, FooterComponent, HttpClientModule, MarqueeComponent]
 })
 export class DisplayVulnerabilitiesComponent {
   selectedService: string = '';

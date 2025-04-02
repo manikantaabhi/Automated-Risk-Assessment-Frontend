@@ -24,7 +24,7 @@
           <th>Resource Link</th>
         </tr>
       </thead>
-      <tbody *ngIf="vulnerabilities.length > 0">
+      <tbody *ngIf="vulnerabilities && vulnerabilities.length > 0">
         <tr *ngFor="let v of historyData | filter:searchText">
           <td>
             <input type="checkbox" [(ngModel)]="v.selected" />

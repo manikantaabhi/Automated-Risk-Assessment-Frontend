@@ -6,13 +6,21 @@
     gap: 10%;
 }
 
+.no-wrap{
+  white-space: nowrap;
+}
+
+.no-wrap a.link-color {
+  color: hsl(211, 100%, 50%); 
+}
+
+.no-wrap a.link-color:hover {
+  color: hsl(211, 100%, 40%);
+}
 #vulnerabilities {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
-  }
-  .container {
-    margin-top: 110px;
   }
   #check-vulnerabilities {
     background-color: #007bff;

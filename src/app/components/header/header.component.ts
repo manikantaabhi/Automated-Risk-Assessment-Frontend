@@ -50,6 +50,7 @@ export class HeaderComponent {
   toggleDropdown(event: Event) {
     event.stopPropagation(); // Prevents dropdown from closing immediately
     this.isDropdownOpen = !this.isDropdownOpen;
+    
   }
 
   // Scroll to a service and highlight it
