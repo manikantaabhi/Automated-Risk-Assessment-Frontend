@@ -11,6 +11,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { authGuard } from './auth.guard';
 import { ScheduleJobsComponent } from './components/schedule-jobs/schedule-jobs.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -50,6 +51,11 @@ export const routes: Routes = [
   {
     path: 'notifications',
     component: NotificationsComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'file-upload',
+    component: FileUploadComponent,
     canActivate: [authGuard]
   }
 ];
