@@ -67,6 +67,11 @@ export class HomeComponent {
     alert('Viewing past scans and history...');
   }
 
+  // Navigate to file upload page
+  goToFileUpload() {
+    this.router.navigate(['/file-upload']);
+  }
+
   // Navigate to specific pages
   navigateTo(page: string) {
     switch (page) {
