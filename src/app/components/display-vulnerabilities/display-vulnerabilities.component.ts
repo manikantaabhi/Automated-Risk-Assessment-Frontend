@@ -20,6 +20,8 @@ import { MarqueeComponent } from "../marquee/marquee.component";
 export class DisplayVulnerabilitiesComponent {
   selectedService: string = '';
   vulnerabilities: any;
+  activeFunction:string ='list';
+  selectedCve: any = null;
   inputData: any;
   searchText: string = '';  // Variable to bind the search text
   currentPage: number = 1;  // To track the current page
@@ -28,10 +30,11 @@ export class DisplayVulnerabilitiesComponent {
   totalPages: number = 0;   // Total pages, calculated dynamically
   sortKey: string = ''; // To track the key to sort
   sortOrder: string = 'asc'; // Ascending or descending order
-
+  
   constructor(private router: Router, public dialog: MatDialog, private http: HttpClient, private loadingService: LoadingService) {
     const navigation = this.router.getCurrentNavigation();
     this.vulnerabilities = navigation?.extras.state?.['vulnerabilities'] || [];
+    console.log(this.vulnerabilities);
     this.inputData = navigation?.extras.state?.['inputData'] || [];
     this.vulnerabilities = this.vulnerabilities.map((v: any) => ({ ...v, selected: false })); // Add 'selected' property
     this.calculatePagination();
@@ -42,6 +45,29 @@ export class DisplayVulnerabilitiesComponent {
     setTimeout(() => {
       this.selectedService = ''; // Remove highlight after 3 seconds
     }, 3000);
+  }
+
+  showDetails(v: any) {
+    this.selectedCve = structuredClone(v);
+    this.http.get(`http://localhost:8080/api/vulnerabilities/mitigations/${v.cveId}`, {
+      responseType: 'text' as 'json'
+    }).subscribe(
+      (value) => {
+        this.loadingService.stopLoading();
+        this.selectedCve.mitigation=value;
+      },
+      (error) => {
+        this.selectedCve.mitigation="No Mitigation Found";
+        this.loadingService.stopLoading();
+      }
+    );
+
+    this.activeFunction = 'details';
+  }
+  
+  backToList() {
+    this.activeFunction = 'list';
+    this.selectedCve = null;
   }
 
   // Sort function that handles any key (softwareName, version, cveId, etc.)
@@ -104,21 +130,17 @@ export class DisplayVulnerabilitiesComponent {
   getFilteredData() {
     return this.vulnerabilities.filter((v: any) => {
       const searchText = this.searchText.toLowerCase().trim();
-  
+      
       const softwareName = v.softwareName ? v.softwareName.toLowerCase() : '';
       const version = v.version ? v.version.toLowerCase() : '';
       const cveId = v.cveId ? v.cveId.toLowerCase() : '';
       const description = v.description ? v.description.toLowerCase() : '';
-  
-      // Extract severity from all metrics objects, join them into a string for searching
-      const severityList = v.metrics && v.metrics.length > 0 
-        ? v.metrics.map((m: any) => m.severity ? m.severity.toLowerCase().trim() : '').join(' ') 
-        : '';
+      const severity=v.severity?v.severity.toLowerCase():"";
   
       return softwareName.includes(searchText) || 
              version.includes(searchText) || 
              cveId.includes(searchText) ||
-             severityList.includes(searchText) ||  // Now filters based on all severity values
+             severity.includes(searchText) ||  // Now filters based on all severity values
              description.includes(searchText);
     });
   }

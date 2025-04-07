@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="container">
+<div class="container" *ngIf="activeFunction==='list'">
     <!-- Rows Per Page Selection -->
     <div class="pagination-controls">
         <input id="search-input" type="text" [(ngModel)]="searchText" (input)="calculatePagination()" placeholder="Search vulnerabilities..." />
@@ -29,7 +29,9 @@
           <td>
             <input type="checkbox" [(ngModel)]="v.selected" />
           </td>
-          <td>{{ v.cveId }}</td>
+          <td class="no-wrap">
+            <a href="" class="link-color" (click)="showDetails(v); $event.preventDefault()">{{ v.cveId }}</a>
+          </td>
           <td>{{ v.description }}</td>
           <td>
             <button (click)="toggleDropdown(v)" class="toggle-btn">
@@ -57,4 +59,28 @@
       <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next &raquo;</button>
     </div>
   </div>
+
+  <div class="container detail-view" *ngIf="activeFunction === 'details'">
+    <button (click)="backToList()">← Back</button>
+    <h2>Details for CVE ID: {{ selectedCve?.cveId }}</h2>
+    <p><strong>Description:</strong> {{ selectedCve?.description }}</p>
+    <p><strong>Mitigation:</strong> {{ selectedCve?.mitigation }}</p>
+    <div class="mitigation-info-card">
+      <h4>Important Notice</h4>
+      <p>
+        The mitigation information provided above is based on currently available data and should be considered a general recommendation.
+        For accurate and product-specific remediation guidance, please consult the official documentation or support resources of the corresponding software vendor.
+      </p>
+    </div>
+    
+    <div *ngIf="selectedCve?.references?.length">
+      <strong>Resource Links:</strong>
+      <ul>
+        <li *ngFor="let link of selectedCve.references">
+          <a [href]="link.url" target="_blank">{{ link.url }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
 <app-footer></app-footer>

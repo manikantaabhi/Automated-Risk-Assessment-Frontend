@@ -1,6 +1,6 @@
 <app-header (serviceSelected)="highlightService($event)"></app-header>
-<app-marquee></app-marquee>
-<div class="container">
+<app-marquee *ngIf="activeFunction==='list'"></app-marquee>
+<div class="container" *ngIf="activeFunction==='list'" >
     <!-- Search Input -->
     <div class="search-container">
       
@@ -31,7 +31,7 @@
           <th (click)="sortData('version')">Version</th>
           <th (click)="sortData('cveId')">CVE ID</th>
           <th (click)="sortData('metrics.severity')">Severity</th>
-          <th (click)="sortData('description')">Mitigation</th>
+          <th (click)="sortData('description')">Description</th>
           <th>Resource Link</th>
         </tr>
       </thead>
@@ -42,9 +42,11 @@
           </td>
           <td>{{ inputData.productName }}</td>
           <td>{{ inputData.version }}</td>
-          <td class="no-wrap"><a href="" class="link-color">{{ v.cveId }}</a></td>
+          <td class="no-wrap">
+            <a href="" class="link-color" (click)="showDetails(v); $event.preventDefault()">{{ v.cveId }}</a>
+          </td>
           <td>{{v.severity}}</td>
-          <td>{{ v.mitigation }}</td>
+          <td>{{ v.description }}</td>
           <td>
             <button (click)="toggleDropdown(v)" class="toggle-btn">
               {{ v.showReferences ? 'Hide' : 'View References' }}
@@ -71,5 +73,31 @@
       <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next &raquo;</button>
     </div>
   </div>
+  <div class="container detail-view" *ngIf="activeFunction === 'details'">
+    <button (click)="backToList()">← Back</button>
+    <h2>Details for CVE ID: {{ selectedCve?.cveId }}</h2>
+    <p><strong>Software Name:</strong> {{ inputData.productName }}</p>
+    <p><strong>Version:</strong> {{ inputData.version }}</p>
+    <p><strong>Severity:</strong> {{ selectedCve?.severity }}</p>
+    <p><strong>Description:</strong> {{ selectedCve?.description }}</p>
+    <p><strong>Mitigation:</strong> {{ selectedCve?.mitigation }}</p>
+    <div class="mitigation-info-card">
+      <h4>Important Notice</h4>
+      <p>
+        The mitigation information provided above is based on currently available data and should be considered a general recommendation.
+        For accurate and product-specific remediation guidance, please consult the official documentation or support resources of the corresponding software vendor.
+      </p>
+    </div>
+    
+    <div *ngIf="selectedCve?.resourceLink?.length">
+      <strong>Resource Links:</strong>
+      <ul>
+        <li *ngFor="let link of selectedCve.resourceLink">
+          <a [href]="link" target="_blank">{{ link }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
   <!-- Footer Section -->
 <app-footer></app-footer>

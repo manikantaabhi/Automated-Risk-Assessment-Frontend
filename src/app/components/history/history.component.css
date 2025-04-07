@@ -161,3 +161,33 @@ h2:hover {
     color: black;
   }
   
+  .detail-view{
+    padding: 20px;
+    margin: auto;
+  }
+
+  h2{
+    color: red;
+  }
+
+  .mitigation-info-card {
+    background-color: #f0f4f8;
+    border-left: 6px solid #007bff;
+    padding: 1rem 1.5rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .mitigation-info-card h4 {
+    margin-top: 0;
+    color: #007bff;
+    font-weight: 600;
+  }
+  
+  .mitigation-info-card p {
+    margin: 0.5rem 0 0 0;
+    color: #333;
+    font-size: 0.95rem;
+  }
+  

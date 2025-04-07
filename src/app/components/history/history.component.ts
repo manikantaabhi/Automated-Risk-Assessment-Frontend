@@ -7,12 +7,13 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { FilterPipe } from '../../pipes/filter.pipe';
+import { NgChartsModule } from 'ng2-charts';
 
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css'],
-  imports:[FormsModule,CommonModule,HttpClientModule,HeaderComponent,FooterComponent,FilterPipe]
+  imports:[FormsModule,CommonModule,HttpClientModule,HeaderComponent,FooterComponent,FilterPipe,NgChartsModule]
 })
 export class HistoryComponent implements OnInit {
   historyData: any = null;
@@ -23,7 +24,8 @@ export class HistoryComponent implements OnInit {
   rowsPerPage: number = 10; // Default rows per page
   totalRows: number = 0;    // Total rows in the dataset (filtered)
   totalPages: number = 0;   // Total pages, calculated dynamically
-
+  activeFunction:string ='list';
+  selectedCve: any = null;
   constructor(private router: Router, private http: HttpClient, private loadingService: LoadingService) {}
 
   ngOnInit(): void {
@@ -48,6 +50,31 @@ export class HistoryComponent implements OnInit {
         console.error('Error fetching History data:', error);
       }
     );
+  }
+
+  backToList() {
+    this.activeFunction = 'list';
+    this.selectedCve = null;
+  }
+  showDetails(v: any) {
+    console.log("v=",v);
+    this.selectedCve = structuredClone(v);
+    console.log("selecred",this.selectedCve);
+    this.http.get(`http://localhost:8080/api/vulnerabilities/mitigations/${v.cveId}`, {
+      responseType: 'text' as 'json'
+    }).subscribe(
+      (value) => {
+        this.loadingService.stopLoading();
+        this.selectedCve.description=v.description;
+        this.selectedCve.mitigation=value;
+      },
+      (error) => {
+        this.selectedCve.mitigation="No Mitigation Found";
+        this.loadingService.stopLoading();
+      }
+    );
+
+    this.activeFunction = 'details';
   }
 
   deleteSelected(): void {
