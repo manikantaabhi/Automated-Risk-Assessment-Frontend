@@ -31,8 +31,9 @@
           <th (click)="sortData('version')">Version</th>
           <th (click)="sortData('cveId')">CVE ID</th>
           <th (click)="sortData('metrics.severity')">Severity</th>
-          <th (click)="sortData('description')">Description</th>
-          <th>Resource Link</th>
+          <th (click)="sortData('description')">Description <button (click)="downloadExcel()" class="save-btn">Download</button></th>
+          <th>Resource Link 
+          </th>
         </tr>
       </thead>
       <tbody *ngIf="vulnerabilities.length > 0">
@@ -63,7 +64,8 @@
       </tbody>
     </table>
     
-    <button (click)="saveSelected()" class="save-btn">Save Selected</button>
+    <div class="fetch-btns"><button (click)="saveSelected()" class="fetch-btn">Save Selected</button>
+      <button (click)="viewHistory()" class="fetch-btn">History</button></div>
     
   
     <!-- Pagination Controls -->

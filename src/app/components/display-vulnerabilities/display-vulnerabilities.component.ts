@@ -10,7 +10,8 @@ import { FooterComponent } from '../footer/footer.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoadingService } from '../../services/loading.service';
 import { MarqueeComponent } from "../marquee/marquee.component";
-
+import * as XLSX from 'xlsx';
+import * as Filesaver from 'file-saver';
 @Component({
   selector: 'app-display-vulnerabilities',
   templateUrl: './display-vulnerabilities.component.html',
@@ -210,4 +211,27 @@ export class DisplayVulnerabilitiesComponent {
       }
     );
   }
+
+  downloadExcel(): void {
+    const exportData = this.vulnerabilities.map((v:any) => ({
+      'Software Name': this.inputData.productName || '',
+      'Version': this.inputData.version || '',
+      'CVE ID': v.cveId || '',
+      'Severity': v.severity || '',
+      'Description': v.description || '',
+      'Resource Links': (v.resourceLink || []).join(', ')
+    }));
+  
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData);
+    const workbook: XLSX.WorkBook = { Sheets: { 'Vulnerabilities': worksheet }, SheetNames: ['Vulnerabilities'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  
+    const blob: Blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    Filesaver.saveAs(blob, 'vulnerabilities.xlsx');
+  }
+
+  viewHistory() {
+    this.router.navigate(['/history']); // Navigate to HistoryComponent
+  }
+  
 }

@@ -31,6 +31,9 @@
     cursor: pointer;
     margin: 10px;
   }
+  #check-vulnerabilities:hover {
+    background-color: #0056b3;
+  }
 
   #search-input {
     border-radius: 5px;
@@ -208,3 +211,39 @@ h2:hover {
     font-size: 0.95rem;
   }
   
+  .save-btn{
+    margin-left: 45%;
+    background-color: #d3611f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    font-size: 14px;
+  }
+  .save-btn:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px); /* Lift effect */
+  }
+.fetch-btns{
+  display: flex;
+  justify-content: center;
+  gap: 10%;
+}
+.fetch-btn{
+  background-color: #d3611f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    font-size: 14px;
+}
+.fetch-btn:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px); /* Lift effect */
+  }
