@@ -15,7 +15,8 @@ import { MarqueeComponent } from "../marquee/marquee.component"; // Import Foote
 export class HomeComponent {
   selectedService: string = ''; // Tracks the highlighted service
   clickedServices: { [key: string]: boolean } = {}; // Tracks clicked services separately
-
+  notifications: any[] = [
+  ]; // Array to hold notifications
     // Function to handle service button clicks
     onServiceClick(serviceId: string) {
       this.clickedServices = { ...this.clickedServices, [serviceId]: true };

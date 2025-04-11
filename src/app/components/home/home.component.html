@@ -1,5 +1,10 @@
 <app-header (serviceSelected)="highlightService($event)"></app-header>
 <app-marquee></app-marquee>
+<div class="notifications">
+  <div class="notification" *ngFor="let notification of notifications" [ngClass]="{'error': notification.type === 'error', 'success': notification.type === 'success'}">
+    {{ notification.message }}
+  </div>
+</div>
 <div class="container"> 
     <div class="row d-flex justify-content-center"> <!-- Centered row -->
       <!-- Check Vulnerabilities -->

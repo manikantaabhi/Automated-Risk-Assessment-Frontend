@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Output, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { authGuard } from '../../auth.guard';
-
+import { HttpClient, HttpClientModule } from '@angular/common/http'; // ✅ Add this
 import { MatDialog } from '@angular/material/dialog';
 import { VulnerabilityPopupComponent } from '../vulnerability-popup/vulnerability-popup.component';
 
@@ -11,7 +10,7 @@ import { VulnerabilityPopupComponent } from '../vulnerability-popup/vulnerabilit
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule,HttpClientModule]
 })
 export class HeaderComponent {
   @Output() serviceSelected = new EventEmitter<string>(); // Emits selected service to WelcomeComponent
@@ -41,7 +40,7 @@ export class HeaderComponent {
     return this.isHeaderVisible ? 'show' : '';
   }
 
-  constructor(private router: Router,public dialog: MatDialog) {
+  constructor(private router: Router,public dialog: MatDialog, private http: HttpClient) {
     this.isLoggedIn =true;
     this.username=sessionStorage.getItem("username");
   }
@@ -109,4 +108,43 @@ export class HeaderComponent {
   viewHistory() {
     this.router.navigate(['/history']); // Navigate to HistoryComponent
   }
+
+  // file upload 
+
+  showUploadModal = false;
+selectedFile!: File;
+
+openUploadModal() {
+  this.showUploadModal = true;
+}
+
+closeUploadModal() {
+  this.showUploadModal = false;
+}
+
+onFileSelected(event: any) {
+  this.selectedFile = event.target.files[0];
+}
+
+uploadFile() {
+  if (!this.selectedFile) return;
+
+  const formData = new FormData();
+  formData.append('file', this.selectedFile);
+  formData.append('username', sessionStorage.getItem("username")!); // Append username to form data
+
+  this.http.post('http://localhost:8080/api/vulnerabilities/excel', formData).subscribe({
+    next: (res) => {
+      alert('File uploaded successfully!');
+      this.closeUploadModal();
+    },
+    error: (err) => {
+      alert(err.error?.error);
+      console.error(err);
+    }
+  });
+}
+
+
+  // end of flie upload
 }

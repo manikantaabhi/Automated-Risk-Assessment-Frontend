@@ -7,6 +7,7 @@
 
     <!-- Buttons Right Side -->
     <div class="menu-options">
+      <button id="uploadBtn" (click)="openUploadModal()">Upload Organization data</button>
       <button (click)="navigateTo('/')">Home</button>
       <button (click)="scrollToSection('about-us')">About Us</button>
 
@@ -30,3 +31,12 @@
     </div>
   </div>
 </nav>
+
+<div *ngIf="showUploadModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Upload Organization File</h3>
+    <input type="file" (change)="onFileSelected($event)" />
+    <button (click)="uploadFile()">Upload</button>
+    <button (click)="closeUploadModal()">Cancel</button>
+  </div>
+</div>
