@@ -1,0 +1,50 @@
+<div class="report-form-container">
+  <!-- ❌ Close icon (top-right) -->
+  <button class="close-icon" (click)="onCloseClick()">×</button>
+
+  <form [formGroup]="reportForm" (ngSubmit)="submitForm()">
+    <div class="row">
+      <label>Make:</label>
+      <input type="text" formControlName="make" />
+
+      <label>Product:</label>
+      <input type="text" formControlName="product" />
+
+      <label>Version:</label>
+      <input type="text" formControlName="version" />
+
+      <label>Type:</label>
+      <select formControlName="type">
+        <option value="">Select Type</option>
+        <option value="os">os</option>
+        <option value="app">app</option>
+        <option value="hardware">hardware</option>
+      </select>
+
+
+      <label>Keyword:</label>
+      <input type="text" formControlName="keyword" />
+    </div>
+    <div class="row">
+      <button type="button">
+        <label>
+          Upload/Update New File
+          <input type="file" (change)="onFileChange($event)" />
+        </label>
+      </button>
+
+      <button type="button">
+        Choose Existing File
+      </button>
+
+      <div class="date-range">
+        <label>Date Range:</label>
+        <input type="date" formControlName="start" />
+        to
+        <input type="date" formControlName="end" />
+      </div>
+    </div>
+
+    <button type="submit">Submit Report</button>
+  </form>
+</div>

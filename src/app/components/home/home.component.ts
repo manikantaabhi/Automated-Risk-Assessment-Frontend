@@ -5,7 +5,9 @@ import { VulnerabilityPopupComponent } from '../vulnerability-popup/vulnerabilit
 import { HeaderComponent } from '../header/header.component';
 import { CommonModule } from '@angular/common'; // Required for standalone components
 import { FooterComponent } from '../footer/footer.component';
-import { MarqueeComponent } from "../marquee/marquee.component"; // Import FooterComponent
+import { MarqueeComponent } from "../marquee/marquee.component"; 
+import { ReportComponent } from '../report/report.component';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -53,7 +55,11 @@ export class HomeComponent {
 
   // Function to view reports
   viewReports() {
-    alert('Viewing reports...');
+    this.dialog.open(ReportComponent, {
+      width: '700px',
+      disableClose: false, // Allow clicking outside to close (optional)
+      autoFocus: true
+    });
   }
 
   // Function to schedule a job

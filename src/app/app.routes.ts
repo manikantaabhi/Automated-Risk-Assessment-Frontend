@@ -10,7 +10,7 @@ import { WelcomePageComponent } from './components/welcomepage/welcomepage.compo
 import { FooterComponent } from './components/footer/footer.component';
 import { authGuard } from './auth.guard';
 import { HistoryComponent } from './components/history/history.component';
-
+import { DisplayReportComponent } from './components/display-report/display-report.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -46,6 +46,10 @@ export const routes: Routes = [
     path: 'history', 
     component: HistoryComponent,
     canActivate: [authGuard]
-  }
+  },
+  { path: 'display-report', 
+    component: DisplayReportComponent,
+    canActivate: [authGuard]
+  },
 
 ];
