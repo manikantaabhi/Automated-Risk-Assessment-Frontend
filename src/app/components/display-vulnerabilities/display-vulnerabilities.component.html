@@ -82,7 +82,7 @@
     <p><strong>Version:</strong> {{ inputData.version }}</p>
     <p><strong>Severity:</strong> {{ selectedCve?.severity }}</p>
     <p><strong>Description:</strong> {{ selectedCve?.description }}</p>
-    <p><strong>Mitigation:</strong> {{ selectedCve?.mitigation }}</p>
+    <p><strong>Mitigation:</strong> {{ selectedCve?.mitigation ? selectedCve.mitigation : 'Loading...' }}</p>
     <div class="mitigation-info-card">
       <h4>Important Notice</h4>
       <p>
