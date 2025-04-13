@@ -12,6 +12,9 @@ import { authGuard } from './auth.guard';
 import { HistoryComponent } from './components/history/history.component';
 import { DisplayReportComponent } from './components/display-report/display-report.component';
 import { UserGuideComponent } from './components/user-guide/user-guide.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
+
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
@@ -26,6 +29,16 @@ export const routes: Routes = [
   { 
     path: 'home', 
     component: HomeComponent,
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'about', 
+    component: AboutUsComponent,
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'contact', 
+    component: ContactUsComponent,
     canActivate: [authGuard]
   },
   { 

@@ -9,7 +9,7 @@
     <div class="menu-options">
       <button id="uploadBtn" (click)="openUploadModal()">Upload Organization data</button>
       <button (click)="navigateTo('/')">Home</button>
-      <button (click)="scrollToSection('about-us')">About Us</button>
+      <button (click)="viewAbout()">About Us</button>
 
       <!-- Services Dropdown -->
       <div>
@@ -17,13 +17,13 @@
         <ul [class.show]="isDropdownOpen">
           <li><a (click)="checkVulnerabilities()">Check Vulnerabilities</a></li>
           <li><a (click)="scrollToService('notifications')">Notifications</a></li>
-          <li><a (click)="scrollToService('reports')">Reports</a></li>
+          <li><a (click)="viewReports()">Reports</a></li>
           <li><a (click)="scrollToService('schedule-job')">Schedule a Job</a></li>
           <li><a (click)="viewHistory()">History</a></li>
         </ul>
       </div>
 
-      <button (click)="scrollToSection('contact-us')">Contact Us</button>
+      <button (click)="viewContact()">Contact Us</button>
       <button *ngIf="!isLoggedIn" (click)="onLogin('login')">Login</button>
       <button *ngIf="!isLoggedIn" (click)="onLogin('signup')">Signup</button>
       <button (click)="onLogout('logout')">Logout</button>

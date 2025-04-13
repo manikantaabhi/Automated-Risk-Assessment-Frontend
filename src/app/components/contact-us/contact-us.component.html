@@ -1,0 +1,13 @@
+<button (click)="goBack()" class="back-button">
+    ← Back
+  </button>
+<div class="contact-form">
+    <h2>Contact Us</h2>
+    <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+      <input type="text" name="name" [(ngModel)]="formData.name" placeholder="Your Name" required />
+      <input type="email" name="email" [(ngModel)]="formData.email" placeholder="Your Email" required />
+      <textarea name="message" [(ngModel)]="formData.message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+  

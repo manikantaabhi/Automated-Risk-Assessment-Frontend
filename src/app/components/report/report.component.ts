@@ -8,18 +8,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { DisplayReportComponent } from '../display-report/display-report.component';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
- 
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
   styleUrls: ['./report.component.css'],
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule, CommonModule, FormsModule, DisplayReportComponent ]})
+  imports: [ReactiveFormsModule, HttpClientModule, CommonModule, FormsModule ]})
 
 export class ReportComponent {
   // Define the form structure
@@ -37,7 +36,8 @@ dateRangeValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | n
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<ReportComponent>, // used to close the popup
-    private http: HttpClient,private dialog: MatDialog,private router: Router
+    private http: HttpClient,private dialog: MatDialog,private router: Router,
+    private loadingService: LoadingService // Loading service for spinner
   ) 
 
   {
@@ -65,10 +65,23 @@ dateRangeValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | n
 
   // ✅ Submit the form and send data to the backend
   submitForm() {
+    // Check if the form is valid before proceeding
+    
+
     const formData = new FormData(); // multipart/form-data format
 
     const values = this.reportForm.value;
 
+    if (!values.make || !values.product || !values.version || !values.type || !values.start || !values.end) {
+      alert('Please fill in all mandatory fields: Make, Product, Version, Type, and Date Range.');
+      return; // Stop form submission
+  }
+
+  // Validate date range
+  if (new Date(values.end) < new Date(values.start)) {
+      alert('End date cannot be earlier than the start date.');
+      return; // Stop form submission
+  }
     // Only append non-empty values (to avoid sending null/undefined)
     if (values.make) formData.append('make', values.make);
     if (values.product) formData.append('productName', values.product);
@@ -81,14 +94,17 @@ dateRangeValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | n
     formData.append('fromDate', values.start);
     formData.append('toDate', values.end);
 
+    this.loadingService.startLoading(); // Start loading spinner
     // ✅ Send POST request to Spring Boot backend
     this.http.post<any>('http://localhost:8080/api/vulnerabilities/report', formData).subscribe({
       next: (response) => {
+        this.loadingService.stopLoading(); // Stop loading spinner
         console.log("Response from backend: ", response);
         this.dialogRef.close(); // Optionally close after successful submit
         this.router.navigate(['/display-report'], { state: { reportData: response } });
       },
       error: (err) => {
+        this.loadingService.stopLoading(); // Stop loading spinner
         console.error('Error submitting report:', err);
         alert('Something went wrong while submitting the report!');
       }

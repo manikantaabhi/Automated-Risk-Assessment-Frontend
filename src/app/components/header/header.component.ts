@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http'; // ✅ Add this
 import { MatDialog } from '@angular/material/dialog';
 import { VulnerabilityPopupComponent } from '../vulnerability-popup/vulnerability-popup.component';
+import { ReportComponent } from '../report/report.component';
 
 @Component({
   selector: 'app-header',
@@ -108,6 +109,20 @@ export class HeaderComponent {
   viewHistory() {
     this.router.navigate(['/history']); // Navigate to HistoryComponent
   }
+  viewAbout() {
+    this.router.navigate(['/about']); // Navigate to HistoryComponent
+  }
+  viewContact() {
+    this.router.navigate(['/contact']); // Navigate to HistoryComponent
+  }
+
+  viewReports() {
+      this.dialog.open(ReportComponent, {
+        width: '700px',
+        disableClose: false, // Allow clicking outside to close (optional)
+        autoFocus: true
+      });
+    }
 
   // file upload 
 
