@@ -12,16 +12,20 @@
       <button (click)="viewAbout()">About Us</button>
 
       <!-- Services Dropdown -->
-      <div>
-        <button (click)="toggleDropdown($event)">Services</button>
-        <ul [class.show]="isDropdownOpen">
-          <li><a (click)="checkVulnerabilities()">Check Vulnerabilities</a></li>
-          <li><a (click)="scrollToService('notifications')">Notifications</a></li>
-          <li><a (click)="viewReports()">Reports</a></li>
-          <li><a (click)="scrollToService('schedule-job')">Schedule a Job</a></li>
-          <li><a (click)="viewHistory()">History</a></li>
-        </ul>
-      </div>
+      <!-- Services Dropdown -->
+<div class="dropdown">
+  <button (click)="toggleDropdown($event)">
+    Services <span class="caret">&#9662;</span>
+  </button>
+  <ul [class.show]="isDropdownOpen">
+    <li><a (click)="checkVulnerabilities()">Check Vulnerabilities</a></li>
+    <li><a (click)="scrollToService('notifications')">Notifications</a></li>
+    <li><a (click)="viewReports()">Reports</a></li>
+    <li><a (click)="scrollToService('schedule-job')">Schedule a Job</a></li>
+    <li><a (click)="viewHistory()">History</a></li>
+  </ul>
+</div>
+
 
       <button (click)="viewContact()">Contact Us</button>
       <button *ngIf="!isLoggedIn" (click)="onLogin('login')">Login</button>

@@ -144,3 +144,8 @@ a:hover{
   border-radius: 8px;
 }
 /* end of file upload button */
+
+.caret {
+  font-size: 10px;
+  transition: transform 0.3s ease;
+}

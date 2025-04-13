@@ -8,6 +8,7 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { FilterPipe } from '../../pipes/filter.pipe';
 import { NgChartsModule } from 'ng2-charts';
+import { MarqueeComponent } from '../marquee/marquee.component';
 
 import * as XLSX from 'xlsx';
 import * as Filesaver from 'file-saver';
@@ -15,7 +16,7 @@ import * as Filesaver from 'file-saver';
   selector: 'app-history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css'],
-  imports:[FormsModule,CommonModule,HttpClientModule,HeaderComponent,FooterComponent,FilterPipe,NgChartsModule]
+  imports:[FormsModule,CommonModule,HttpClientModule,HeaderComponent,FooterComponent,FilterPipe,NgChartsModule,MarqueeComponent],
 })
 export class HistoryComponent{
   historyData: any = null;

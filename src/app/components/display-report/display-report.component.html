@@ -2,12 +2,14 @@
 
 <div class="grid-container">
   <div class="chart-box" *ngFor="let chart of paginatedCharts" >
-    <h4>{{ chart.title }}</h4>
-    <canvas baseChart
-            [data]="chart.chartData"
-            [options]="barChartOptions"
-            chartType="bar">
-    </canvas>
+     <h4>{{ chart.title }}</h4> -
+     <canvas baseChart
+     [data]="chart.chartData"
+     [options]="barChartOptions"
+     chartType="bar"
+     (chartClick)="onChartClick($event, chart)">
+</canvas>
+
   </div>
 </div>
 

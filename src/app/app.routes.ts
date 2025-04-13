@@ -14,6 +14,7 @@ import { DisplayReportComponent } from './components/display-report/display-repo
 import { UserGuideComponent } from './components/user-guide/user-guide.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -39,6 +40,11 @@ export const routes: Routes = [
   { 
     path: 'contact', 
     component: ContactUsComponent,
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'terms', 
+    component: TermsAndConditionsComponent,
     canActivate: [authGuard]
   },
   { 

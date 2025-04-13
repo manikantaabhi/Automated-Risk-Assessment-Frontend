@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
   year:any;
-  constructor(){
+  constructor( private router: Router) {
 this.year=new Date().getFullYear();
   }
   scrollToSection(sectionId: string) {
@@ -15,5 +15,14 @@ this.year=new Date().getFullYear();
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  }
+  viewAbout() {
+    this.router.navigate(['/about']); // Navigate to HistoryComponent
+  }
+  viewContact() {
+    this.router.navigate(['/contact']); // Navigate to HistoryComponent
+  }
+  viewTerms() {
+    this.router.navigate(['/terms']); // Navigate to HistoryComponent
   }
 }

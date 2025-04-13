@@ -3,7 +3,7 @@
     <!-- ❌ Close icon -->
     <button class="close-icon" (click)="onCloseClick()">×</button>
 
-    <h2 class="popup-title">Submit a Report</h2>
+    <h2 class="popup-title">Submit a Report Request</h2>
 
     <form [formGroup]="reportForm" (ngSubmit)="submitForm()">
       <div class="form-row">
@@ -54,9 +54,12 @@
           Upload/Update New File
           <input type="file" (change)="onFileChange($event)" />
         </label>
+          {{ selectedFileName }}
+        
       </div>
+      
 
-      <button type="submit" class="submit-btn">Submit Report</button>
+      <button type="submit" class="submit-btn">Request</button>
     </form>
   </div>
 </div>

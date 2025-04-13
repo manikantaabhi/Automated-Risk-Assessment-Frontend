@@ -23,6 +23,7 @@ import { LoadingService } from '../../services/loading.service';
 export class ReportComponent {
   // Define the form structure
   reportForm: FormGroup;
+  selectedFileName: string = '';
     // ✅ Custom validator: Ensures 'end' is not before 'start'
 dateRangeValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
   const start = group.get('start')?.value;
@@ -61,6 +62,13 @@ dateRangeValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | n
     if (file) {
       this.reportForm.patchValue({ file }); // Bind selected file to form
     }
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFileName = input.files[0].name;
+      // Proceed with your file logic...
+    } else {
+      this.selectedFileName = '';
+    }
   }
 
   // ✅ Submit the form and send data to the backend
@@ -73,8 +81,10 @@ dateRangeValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | n
     const values = this.reportForm.value;
 
     if (!values.make || !values.product || !values.version || !values.type || !values.start || !values.end) {
-      alert('Please fill in all mandatory fields: Make, Product, Version, Type, and Date Range.');
-      return; // Stop form submission
+      if(!values.file){
+        alert('Please fill in all mandatory fields: Make, Product, Version, Type, and Date Range.');
+        return; // Stop form submission
+      }
   }
 
   // Validate date range
