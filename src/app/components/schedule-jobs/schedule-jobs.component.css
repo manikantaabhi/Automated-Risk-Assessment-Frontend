@@ -1,7 +1,7 @@
 :host {
   display: block;
   font-family: 'Orbitron', sans-serif;
-  background-color: #121212;
+  background-color: #ffffff;
   color: #e0e0e0;
   padding: 20px;
 }
@@ -10,11 +10,11 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #121212; /* Uniform background color */
+  background-color: #ffffff;
 }
 
 header {
-  position: relative; /* For home icon positioning */
+  position: relative;
   border-bottom: 2px solid #1e88e5;
   margin-bottom: 20px;
   padding-bottom: 10px;
@@ -23,6 +23,7 @@ header {
 h2 {
   font-size: 2em;
   margin: 0 0 10px 0;
+  color: #000000;
 }
 
 .home-icon {
@@ -47,17 +48,18 @@ label {
   display: block;
   margin-bottom: 5px;
   font-family: 'Orbitron', sans-serif;
+  color: #000000;
 }
 
 input[type="text"] {
   width: 100%;
-  box-sizing: border-box; /* Ensures the padding and border are included in the width */
+  box-sizing: border-box;
   padding: 10px;
   border: 1px solid #333;
   border-radius: 4px;
-  background-color: #1e1e1e;
-  color: #e0e0e0;
-  font-size: 1.2em; /* Increased font size for text fields */
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 1.2em;
   font-family: 'Orbitron', sans-serif;
 }
 
@@ -88,44 +90,45 @@ ul {
 }
 
 li {
-  background-color: #1e1e1e;
+  background-color: #ffffff;
   border: 1px solid #333;
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 4px;
   display: flex;
-  flex-direction: row; /* Job details and actions are on the same row */
+  flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start; /* Align items at the top */
+  align-items: flex-start;
 }
 
 .job-details {
   display: flex;
   flex-direction: column;
-  flex: 1; /* Allow job details to take up available space */
+  flex: 1;
 }
 
 .job-title {
   font-size: 1.2em;
   margin: 0;
   font-weight: bold;
+  color: #000000;
 }
 
 .job-info {
   margin: 5px 0 0 0;
   font-size: 0.9em;
-  color: #9e9e9e;
+  color: #000000;
 }
 
 .job-keywords {
   margin: 5px 0 0 0;
   font-size: 0.9em;
-  color: #9e9e9e;
+  color: #000000;
 }
 
 .job-actions {
   margin-left: 20px;
-  align-self: flex-start; /* Ensure the cancel button aligns with the top of job details */
+  align-self: flex-start;
 }
 
 button.cancel-btn {
@@ -146,4 +149,8 @@ button.cancel-btn:hover {
   text-align: center;
   padding: 40px 0;
   color: #757575;
+}
+
+h3 {
+  color: #000000;
 }

@@ -1,23 +1,60 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
 
-import { ScheduleJobsComponent } from './schedule-jobs.component';
+@Component({
+  selector: 'app-schedule-jobs',
+  templateUrl: './schedule-jobs.component.html',
+  styleUrls: ['./schedule-jobs.component.css']
+})
+export class ScheduleJobsComponent {
+  jobs = [
+    {
+      id: 1,
+      jobName: 'Database Backup',
+      vendor: 'AWS',
+      productName: 'RDS',
+      version: 'v2.3',
+      keywords: 'backup, database'
+    },
+    {
+      id: 2,
+      jobName: 'Security Scan',
+      vendor: 'Qualys',
+      productName: 'Scanner',
+      version: 'v1.8',
+      keywords: 'security, scan'
+    }
+  ];
 
-describe('ScheduleJobsComponent', () => {
-  let component: ScheduleJobsComponent;
-  let fixture: ComponentFixture<ScheduleJobsComponent>;
+  newJob = {
+    jobName: '',
+    vendor: '',
+    productName: '',
+    version: '',
+    keywords: ''
+  };
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ScheduleJobsComponent]
-    })
-    .compileComponents();
+  // Create a new job
+  createJob(): void {
+    if (this.newJob.jobName && this.newJob.vendor) {
+      const newJob = { ...this.newJob, id: Date.now() };
+      this.jobs.push(newJob);
+      this.resetForm();
+    }
+  }
 
-    fixture = TestBed.createComponent(ScheduleJobsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  cancelJob(jobId: number): void {
+    this.jobs = this.jobs.filter(job => job.id !== jobId);
+  }
+
+
+  resetForm(): void {
+    this.newJob = {
+      jobName: '',
+      vendor: '',
+      productName: '',
+      version: '',
+      keywords: ''
+    };
+  }
+}

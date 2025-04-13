@@ -13,7 +13,7 @@ import { ScheduledJob, ScheduledJobService } from '../../services/scheduled-job.
 })
 export class ScheduleJobsComponent implements OnInit {
   jobs: ScheduledJob[] = [];
-  // Initialize newJob with userId = 0; we'll update it after fetching the user record using the username.
+
   newJob: ScheduledJob = {
     jobName: '',
     vendor: '',

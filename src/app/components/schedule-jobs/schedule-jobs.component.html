@@ -8,7 +8,7 @@
     </button>
   </header>
 
-  <!-- Form to create a new scheduled job -->
+
   <form (submit)="createJob(); $event.preventDefault()">
     <div class="form-group">
       <label for="jobName">Job Name:</label>
@@ -33,7 +33,7 @@
     <button type="submit" class="btn">Schedule Job</button>
   </form>
 
-  <!-- List of scheduled jobs -->
+
   <div *ngIf="jobs && jobs.length > 0">
     <h3>Your Scheduled Jobs</h3>
     <ul>

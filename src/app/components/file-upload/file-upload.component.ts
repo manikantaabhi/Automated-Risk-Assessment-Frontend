@@ -65,4 +65,27 @@ export class FileUploadComponent {
       this.message = 'Error uploading file.';
     }
   }
+
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+  }
+
+  onDragLeave(event: DragEvent): void {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent): void {
+    event.preventDefault();
+    if (event.dataTransfer?.files.length) {
+      this.selectedFile = event.dataTransfer.files[0];
+      console.log('File dropped:', this.selectedFile.name, 'Size:', this.selectedFile.size, 'bytes');
+    }
+  }
+
+  onBrowseClick(): void {
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click();
+    }
+  }
 }

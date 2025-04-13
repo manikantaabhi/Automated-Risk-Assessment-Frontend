@@ -1,11 +1,55 @@
-<div class="container">
-  <h1>Upload File</h1>
-  <!-- (ngSubmit) requires FormsModule -->
-  <form (ngSubmit)="onSubmit()" #uploadForm="ngForm">
-    <div class="form-group">
-      <input type="file" (change)="onFileSelected($event)" accept=".csv,.pdf,.xlsx" required>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Centered File Upload</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="upload-container">
+  <div class="upload-card">
+    <div class="upload-header">
+      <h2>Upload File</h2>
     </div>
-    <button type="submit">Upload</button>
-  </form>
-  <p *ngIf="message">{{ message }}</p>
+    <div class="upload-body">
+      <div class="upload-dropzone"
+           role="button"
+           aria-label="File drop zone"
+           (dragover)="onDragOver($event)"
+           (dragleave)="onDragLeave($event)"
+           (drop)="onDrop($event)">
+        <i class="fas fa-file-pdf"></i>
+        <p class="dropzone-text">
+          Drag & drop your file here or click
+          "<span class="select-file-link"
+                 role="button"
+                 tabindex="0"
+                 aria-label="Select File"
+                 (click)="onBrowseClick()">Select File</span>"
+          to browse
+        </p>
+        <!-- Hidden file input -->
+        <input type="file"
+               id="fileInput"
+               (change)="onFileSelected($event)"
+               hidden
+               accept=".csv,.pdf,.xlsx">
+        <div *ngIf="selectedFile" class="file-preview">
+          <p>Selected File: {{ selectedFile?.name }}</p>
+        </div>
+      </div>
+      <div class="upload-actions">
+        <button type="button" class="upload-btn" (click)="onSubmit()">
+          <i class="fas fa-upload"></i> Upload
+        </button>
+      </div>
+      <div *ngIf="message"
+           class="upload-message"
+           aria-live="polite">
+        {{ message }}
+      </div>
+    </div>
+  </div>
 </div>
+</body>
+</html>
