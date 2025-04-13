@@ -1,0 +1,45 @@
+<div class="user-guide-container">
+    <div class="guide-header">
+      <h1>User Guide: NVD Dashboard</h1>
+      <p class="guide-subtitle">Learn how to use all the features effectively</p>
+    </div>
+  
+    <div class="guide-section" *ngFor="let section of [
+      'Uploading Organization Data',
+      'Real-Time Vulnerability Notifications',
+      'Software Inventory',
+      'CVE Details'
+    ]; let i = index">
+      <div class="section-header" (click)="toggleSection(i)">
+        <h2>{{ section }}</h2>
+        <span class="toggle-icon">{{ expandedSections[i] ? '🔼' : '🔽' }}</span>
+      </div>
+      <div class="section-content" *ngIf="expandedSections[i]">
+        <ng-container [ngSwitch]="i">
+          <p *ngSwitchCase="0">
+            Click on the <strong>“Upload Organization Data”</strong> button in the navbar.
+            Select an Excel file (.xlsx) with Vendor, Product, and Version columns.
+            On upload, your data is securely stored in the backend.
+          </p>
+  
+          <p *ngSwitchCase="1">
+            The system checks the NVD database every 2–5 minutes. If a vulnerability matches
+            your uploaded software, a notification will appear with CVE details like severity
+            and mitigation advice.
+          </p>
+  
+          <p *ngSwitchCase="2">
+            Navigate to the <strong>Software Inventory</strong> tab to see all uploaded entries.
+            Use filters to find software by vendor, product, or version.
+          </p>
+  
+          <p *ngSwitchCase="3">
+            Click a vulnerability to see details like CVSS score, attack vector, description,
+            and published date. Stay informed and secure.
+          </p>
+  
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  

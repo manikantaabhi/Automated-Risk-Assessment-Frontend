@@ -71,6 +71,9 @@ export class HomeComponent {
   viewHistory() {
     this.router.navigate(['/history']); // Navigate to HistoryComponent
   }
+  viewOthers() {
+    this.router.navigate(['/app-user-guide']); // Navigate to HistoryComponent
+  }
   
 
   // Navigate to specific pages

@@ -11,12 +11,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { authGuard } from './auth.guard';
 import { HistoryComponent } from './components/history/history.component';
 import { DisplayReportComponent } from './components/display-report/display-report.component';
-
+import { UserGuideComponent } from './components/user-guide/user-guide.component';
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'app-user-guide', component: UserGuideComponent },
   { 
     path: '', 
     component: HomeComponent,

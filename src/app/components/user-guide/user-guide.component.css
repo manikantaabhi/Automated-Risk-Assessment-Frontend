@@ -1,0 +1,100 @@
+.user-guide-container {
+    background-color: #f8f9fa;
+    padding: 40px;
+    margin: 40px auto;
+    max-width: 1000px;
+    border-radius: 15px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+    font-family: 'Segoe UI', sans-serif;
+    color: #343a40;
+  }
+  
+  .guide-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .guide-header h1 {
+    font-size: 2.5rem;
+    color: #007bff;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  
+  .guide-subtitle {
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin-top: 10px;
+  }
+  
+  .guide-section {
+    background-color: #ffffff;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    border-left: 5px solid #007bff;
+    box-shadow: 0px 2px 10px rgba(0, 123, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .guide-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 123, 255, 0.1);
+    background: linear-gradient(135deg, #f9fbfd, #eef3ff);
+  }
+  
+  .guide-section h2 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .guide-section p,
+  .guide-section ul {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .guide-section ul {
+    padding-left: 20px;
+  }
+  
+  .guide-section li {
+    margin-bottom: 8px;
+  }
+
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .section-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #2c3e50;
+  }
+  
+  .toggle-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+    color: #007bff;
+  }
+  
+  .section-content {
+    margin-top: 15px;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Optional smooth fade-in */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  

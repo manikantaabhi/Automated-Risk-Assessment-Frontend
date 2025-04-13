@@ -64,7 +64,7 @@
     <button (click)="backToList()">← Back</button>
     <h2>Details for CVE ID: {{ selectedCve?.cveId }}</h2>
     <p><strong>Description:</strong> {{ selectedCve?.description }}</p>
-    <p><strong>Mitigation:</strong> {{ selectedCve?.mitigation }}</p>
+    <p><strong>Mitigation:</strong> {{ selectedCve?.mitigation ? selectedCve.mitigation : 'Loading...' }}</p>
     <div class="mitigation-info-card">
       <h4>Important Notice</h4>
       <p>
