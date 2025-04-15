@@ -21,9 +21,11 @@
       <div class="col-md-4 d-flex justify-content-center">
         <div class="feature-box shadow-lg p-4 rounded d-flex flex-column align-items-center justify-content-between" style="min-height: 250px;">
           <i class="icon fas fa-bell"></i>
+          <span style="color: red; font-size: 2rem;" class="badge badge-danger" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
           <h3 class="text-warning">Notifications</h3>
           <p>View important security alerts.</p>
-          <button (click)="viewNotifications()">View</button>
+          <button (click)="viewNotifications()">View
+            </button>
         </div>
       </div>
   

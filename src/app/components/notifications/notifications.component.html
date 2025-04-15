@@ -1,0 +1,101 @@
+<app-header></app-header>
+<app-marquee></app-marquee>
+<div class="title"><p>Notifications</p></div>
+<div class="info-box">
+    <p>
+      These vulnerabilities are newly published in the <strong>National Vulnerability Database (NVD)</strong>.
+      Some entries may be generic or not directly tied to your specific products because NVD has not yet provided exact <strong>CPE</strong> matches.
+      Therefore, these vulnerabilities <strong>may or may not affect your systems</strong>.
+    </p>
+    <!-- <p>
+      👉 <a href="#" class="suggestion-link">Click here for our suggestions</a> — based on our internal analysis (note: they may not be 100% accurate).
+    </p> -->
+  </div>
+<div class="container"  *ngIf="activeFunction==='list'" >
+    <!-- Rows Per Page Selection -->
+    <div class="pagination-controls">
+        <input id="search-input" type="text" [(ngModel)]="searchText" (input)="calculatePagination()" placeholder="Search vulnerabilities..." />
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">&laquo; Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next &raquo;</button>
+    
+      <label for="rowsPerPage">Rows per page:</label>
+      <select [(ngModel)]="rowsPerPage" (change)="onRowsPerPageChange(rowsPerPage)">
+        <option *ngFor="let option of [5, 10, 20, 50]" [value]="option">{{ option }}</option>
+        <option [value]="totalRows">All</option>
+      </select>
+    </div>
+  
+    <!-- Table -->
+    <table id="vulnerabilities">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th (click)="sortData('cveId')">CVE ID</th>
+          <th (click)="sortData('mitigation')">Description <button (click)="downloadExcel()" class="save-btn">Download</button></th>
+          <th>Resource Link</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="vulnerabilities && vulnerabilities.length > 0">
+        <tr *ngFor="let v of displayedData | filter:searchText">
+          <td>
+            <input type="checkbox" [(ngModel)]="v.selected" />
+          </td>
+          <td class="no-wrap">
+            <a href="" class="link-color" (click)="showDetails(v); $event.preventDefault()">{{ v.cveId }}</a>
+          </td>
+          <td>{{ v.description }}</td>
+          <td>
+            <button (click)="toggleDropdown(v)" class="toggle-btn">
+              {{ v.showReferences ? 'Hide' : 'View References' }}
+            </button>
+            <div *ngIf="v.showReferences" class="dropdown-content">
+              <ul>
+                <li *ngFor="let li of v.references">
+                  <a [href]="li.referenceLink" target="_blank">{{ li.url }}</a>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    
+    <div class="fetch-btns"><button (click)="deleteSelected()" class="save-btn">Resolved / Ignore</button></div>
+  
+    <!-- Pagination Controls -->
+    <div class="pagination-controls">
+      <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">&laquo; Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next &raquo;</button>
+    </div>
+  </div>
+
+  <div class="container detail-view" *ngIf="activeFunction === 'details'">
+    <button (click)="backToList()">← Back</button>
+    <h2>Details for CVE ID: {{ selectedCve?.cveId }}</h2>
+    <p><strong>Description:</strong> {{ selectedCve?.description }}</p>
+    <p><strong>Mitigation:</strong> {{ selectedCve?.mitigation ? selectedCve.mitigation : 'Loading...' }}</p>
+    <div class="mitigation-info-card">
+      <h4>Important Notice</h4>
+      <p>
+        The mitigation information provided above is based on currently available data and should be considered a general recommendation.
+        For accurate and product-specific remediation guidance, please consult the official documentation or support resources of the corresponding software vendor.
+      </p>
+    </div>
+    
+    <div *ngIf="selectedCve?.references?.length">
+      <strong>Resource Links:</strong>
+      <ul>
+        <li *ngFor="let link of selectedCve.references">
+          <a [href]="link.url" target="_blank">{{ link.url }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+ 
+  
+
+<app-footer></app-footer>

@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common'; // Required for standalone compo
 import { FooterComponent } from '../footer/footer.component';
 import { MarqueeComponent } from "../marquee/marquee.component"; 
 import { ReportComponent } from '../report/report.component';
+import { NotificationService } from '../../services/NotificationService';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,8 @@ export class HomeComponent {
   notifications: any[] = [
   ]; // Array to hold notifications
     // Function to handle service button clicks
+    vulnerabilities: any[] = [];
+    notificationCount: number = 0;
     onServiceClick(serviceId: string) {
       this.clickedServices = { ...this.clickedServices, [serviceId]: true };
     }
@@ -30,8 +33,15 @@ export class HomeComponent {
         this.selectedService = ''; // Remove highlight after 3 seconds
       }, 3000);
     }
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(private router: Router, public dialog: MatDialog, public notificationService:NotificationService) {}
 
+
+  ngOnInit() {
+    let username = sessionStorage.getItem("username") || '';
+    this.notificationService.getUnreadCount(username).subscribe(count => {
+      this.notificationCount = count;
+    });
+  }
   // Open the vulnerability popup
   checkVulnerabilities() {
     const dialogRef = this.dialog.open(VulnerabilityPopupComponent, {
@@ -50,8 +60,21 @@ export class HomeComponent {
 
   // Function to navigate to notifications page or show alerts
   viewNotifications() {
-    alert('Showing notifications...');
+    let username = sessionStorage.getItem("username") || '';
+    this.notificationService.getAllNotifications(username).subscribe((vulnerabilities) => {
+      this.vulnerabilities = vulnerabilities; // Store notifications in the component
+      console.log(this.vulnerabilities);
+      if (this.vulnerabilities.length > 0) {
+        this.router.navigate(['/notifications'], { 
+          state: { vulnerabilities: this.vulnerabilities} 
+        });
+      } else {
+        alert('No new notifications!');
+      }
+    });
   }
+
+ 
 
   // Function to view reports
   viewReports() {
