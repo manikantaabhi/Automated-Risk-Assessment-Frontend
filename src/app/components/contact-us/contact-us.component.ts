@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LoadingService } from '../../services/loading.service';
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-contact-us',
   imports: [FormsModule,HttpClientModule],
@@ -27,7 +28,7 @@ export class ContactUsComponent {
       return;
     }
     this.loadingService.startLoading();
-    this.http.post('http://localhost:8080/contact/send', this.formData, { responseType: 'text' })
+    this.http.post(`${environment.apiBaseUrl}/contact/send`, this.formData, { responseType: 'text' })
       .subscribe(
         (response) => {
           this.loadingService.stopLoading();

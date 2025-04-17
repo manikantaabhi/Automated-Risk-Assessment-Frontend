@@ -1,0 +1,90 @@
+.job-scheduler-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .job-scheduler-container h2,
+  .job-scheduler-container h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .job-scheduler-container label {
+    display: block;
+    margin-bottom: 6px;
+    color: #555;
+    font-weight: 500;
+  }
+  
+  .job-scheduler-container input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border 0.3s, box-shadow 0.3s;
+  }
+  
+  .job-scheduler-container input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+    outline: none;
+  }
+  
+  .job-scheduler-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .job-scheduler-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .scheduled-jobs-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .scheduled-jobs-list li {
+    background-color: #f9f9f9;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+  
+
+  .job-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+  }
+  
+
+  .btn-red {
+    background-color: red;
+    color: white;
+    border: none;
+  }
+  
+  .btn-red:hover {
+    background-color: darkred;
+    cursor: pointer;
+  }
+  

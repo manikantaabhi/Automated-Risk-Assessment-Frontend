@@ -5,6 +5,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http'; // ✅ Add 
 import { MatDialog } from '@angular/material/dialog';
 import { VulnerabilityPopupComponent } from '../vulnerability-popup/vulnerability-popup.component';
 import { ReportComponent } from '../report/report.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,13 @@ export class HeaderComponent {
   username:any;
   lastScrollY = 0;
   isHeaderVisible = true;
+
+  isMobileMenuOpen = false;
+
+toggleMobileMenu() {
+  this.isMobileMenuOpen = !this.isMobileMenuOpen;
+}
+
   // Listen to the window scroll event
   @HostListener('window:scroll', ['$event'])
   onScroll(): void {
@@ -148,7 +156,7 @@ uploadFile() {
   formData.append('file', this.selectedFile);
   formData.append('username', sessionStorage.getItem("username")!); // Append username to form data
 
-  this.http.post('http://localhost:8080/api/vulnerabilities/excel', formData).subscribe({
+  this.http.post(`${environment.apiBaseUrl}/api/vulnerabilities/excel`, formData).subscribe({
     next: (res) => {
       alert('File uploaded successfully!');
       this.closeUploadModal();

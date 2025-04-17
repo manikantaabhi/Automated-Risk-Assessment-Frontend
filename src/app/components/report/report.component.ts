@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from '../../../environments/environment'; // Adjust the path as necessary
 // Standalone module setup
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -106,7 +106,7 @@ dateRangeValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | n
 
     this.loadingService.startLoading(); // Start loading spinner
     // ✅ Send POST request to Spring Boot backend
-    this.http.post<any>('http://localhost:8080/api/vulnerabilities/report', formData).subscribe({
+    this.http.post<any>(`${environment.apiBaseUrl}/api/vulnerabilities/report`, formData).subscribe({
       next: (response) => {
         this.loadingService.stopLoading(); // Stop loading spinner
         console.log("Response from backend: ", response);

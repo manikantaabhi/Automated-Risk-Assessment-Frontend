@@ -12,6 +12,7 @@ import { LoadingService } from '../../services/loading.service';
 import { MarqueeComponent } from "../marquee/marquee.component";
 import * as XLSX from 'xlsx';
 import * as Filesaver from 'file-saver';
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-display-vulnerabilities',
   templateUrl: './display-vulnerabilities.component.html',
@@ -50,7 +51,7 @@ export class DisplayVulnerabilitiesComponent {
 
   showDetails(v: any) {
     this.selectedCve = structuredClone(v);
-    this.http.get(`http://localhost:8080/api/vulnerabilities/mitigations/${v.cveId}`, {
+    this.http.get(`${environment.apiBaseUrl}/api/vulnerabilities/mitigations/${v.cveId}`, {
       responseType: 'text' as 'json'
     }).subscribe(
       (value) => {

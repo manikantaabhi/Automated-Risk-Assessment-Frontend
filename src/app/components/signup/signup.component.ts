@@ -4,6 +4,7 @@ import { FormBuilder, Validators, AbstractControl, ValidationErrors, ValidatorFn
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from '../../../environments/environment'; // Adjust the path as necessary
 
 @Component({
   selector: 'app-signup',
@@ -62,7 +63,7 @@ export class SignupComponent {
     }
 
     const formData = this.signupForm.value;
-    const apiUrl = 'http://localhost:8080/api/users/signup';
+    const apiUrl = `${environment.apiBaseUrl}/api/users/signup`;
 
     this.http.post(apiUrl, formData).subscribe(
       () => {

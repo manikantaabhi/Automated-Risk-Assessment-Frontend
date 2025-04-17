@@ -1,16 +1,7 @@
 <app-header></app-header>
 <app-marquee></app-marquee>
-<div class="title"><p>Notifications</p></div>
-<div class="info-box">
-    <p>
-      These vulnerabilities are newly published in the <strong>National Vulnerability Database (NVD)</strong>.
-      Some entries may be generic or not directly tied to your specific products because NVD has not yet provided exact <strong>CPE</strong> matches.
-      Therefore, these vulnerabilities <strong>may or may not affect your systems</strong>.
-    </p>
-    <!-- <p>
-      👉 <a href="#" class="suggestion-link">Click here for our suggestions</a> — based on our internal analysis (note: they may not be 100% accurate).
-    </p> -->
-  </div>
+<div class="title"><p>{{heading}}</p></div>
+<div class="info-box" [innerHTML]="infoBox"></div>
 <div class="container"  *ngIf="activeFunction==='list'" >
     <!-- Rows Per Page Selection -->
     <div class="pagination-controls">

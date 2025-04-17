@@ -1,0 +1,31 @@
+<app-header></app-header>
+
+<div class="job-scheduler-container">
+    <h2>Job Scheduling</h2>
+    <form (ngSubmit)="submitSchedule()">
+      <label for="scheduledTime">Scheduled Time:</label>
+      <input type="datetime-local" id="scheduledTime" [(ngModel)]="scheduledTime" name="scheduledTime" required />
+  
+      <button type="submit">Schedule Job</button>
+    </form>
+  
+    <h3>Scheduled Jobs</h3>
+    <ul>
+      <li *ngFor="let job of scheduledJobs" class="job-item">
+        <div class="job-card">
+          <p><strong>User:</strong> {{ job.userName }}</p>
+          <p><strong>Scheduled Time:</strong> {{ job.scheduledTime}}</p>
+          <p><strong>Executed:</strong> {{ job.executed ? 'Yes' : 'No' }}</p>
+  
+          <!-- Delete button with dynamic style based on execution status -->
+          <button 
+            (click)="deleteJob(job)" 
+            [ngStyle]="{'background-color': job.executed ? 'red' : 'blue'}">
+            Delete
+          </button>
+        </div>
+      </li>
+    </ul>
+    
+    <p *ngIf="scheduledJobs.length === 0">No scheduled jobs yet.</p>
+</div>

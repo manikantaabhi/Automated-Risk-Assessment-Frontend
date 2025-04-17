@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; // Import CommonModule
 import { Router } from '@angular/router'; // Import Router
 
+import { environment } from '../../../environments/environment'; // Import environment configuration
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
@@ -44,7 +45,7 @@ export class ForgotPasswordComponent {
 
   // Send the reset link to the backend
   sendResetLink() {
-    const apiUrl = 'http://localhost:8080/api/users/forgot-password'; // Backend API URL
+    const apiUrl = `${environment.apiBaseUrl}/api/users/forgot-password`; // Backend API URL
 
     // Sending the email to the backend to trigger reset link
     this.http.post(apiUrl, { email: this.resetData.email }).subscribe(

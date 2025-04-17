@@ -1,133 +1,120 @@
-
+/* General Layout */
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 80px;
-  padding: 0px 10px;
-  
-  /* Adding a shadow for a floating effect */
+  padding: 10px 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  
-  /* Optional: Adding a slight 3D effect with transform */
-  transform: translateY(-5px);
-  
-  /* Optional: Adding a smooth transition for hover effect */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  z-index: 2;
-}
-
-
-.profile-pic{
-  width:50px;
-  height: 50px;
-  background-color: black;
-  margin: 0;
-  border-radius: 50%;
-  text-align: center;
-  display: flex;
-  color: white;
-  justify-content: center;
-  align-items: center;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  font-size: 2rem;
-  text-transform: capitalize;
-}
-.profile-pic-para{
-  margin: 0;
-}
-
-.menu-options{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-.title{
-  color: #007bff;;
-  font-size: 2vw;
-  font-weight: bolder;
-}
-
-
-/* Dropdown Button */
-div {
   position: relative;
 }
 
-#uploadBtn{
-  background:linear-gradient(to right, #1e3c72, #007bff);;
-  color: white;
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
+  text-align: center;
 }
 
-/* Base button style */
+/* Menu Items */
+.menu-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
 button {
-  background-color:#007bff;
+  background-color: #007bff;
   color: white;
-  padding: 10px 20px;  /* Vertical and horizontal padding (adjust for height and width) */
+  padding: 8px 14px;
   border: none;
   border-radius: 5px;
   font-size: 14px;
   cursor: pointer;
-  width: auto;  /* Width automatically adjusts based on content */
-  height: 35px; /* Height adjusts based on content */
-  display: inline-block;  /* To make the button only as wide as its content */
-  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Hover effect */
 button:hover {
   background-color: #2980b9;
-  transform: translateY(-5px);  /* Lift effect */
 }
 
-/* Active effect */
-button:active {
-  background-color: #1c6ea4;
-  transform: translateY(0);  /* Button pressed down */
+/* Profile pic */
+.profile-pic {
+  width: 35px;
+  height: 35px;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Hamburger Menu for Mobile */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
 
-/* Dropdown Menu */
+@media screen and (max-width: 768px) {
+  .menu-options {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    padding: 10px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+  }
+
+  .menu-options.mobile-visible {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+  z-index: 10;
+}
 ul {
+  list-style: none;
+  padding: 0;
   display: none;
   position: absolute;
   top: 100%;
   left: 0;
-  right: 0;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  list-style: none;
-  padding: 0px;
-  margin: 0;
-  transition: opacity 0.1s ease;
-  width: 200px;
   background-color: white;
+  width: 200px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
-
 ul.show {
   display: block;
 }
-
-/* Dropdown Items */
 li {
-  padding: 10px 20px;
+  padding: 10px 15px;
 }
-li:hover{
-  background-color: hsl(0, 0%, 90%);
-}
-
-a {
-  color: #0056b3;
-  text-decoration: none;
-  display: block;
-  transition: background-color 0.3s ease;
-}
-a:hover{
-  font-weight: bolder;
-  cursor: pointer;
+li:hover {
+  background-color: #f0f0f0;
 }
 
-/* file upload button */
+/* Modal remains the same */
+
+
 
 .modal-overlay {
   position: fixed;

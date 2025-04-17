@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { LoadingService } from '../../services/loading.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -53,7 +54,7 @@ export class LoginComponent {
 
     if (this.loginForm.valid) {
       const loginData = this.loginForm.value;
-      const apiUrl = 'http://localhost:8080/api/users/login';
+      const apiUrl = `${environment.apiBaseUrl}/api/users/login`;
 
       this.http.post(apiUrl, loginData).subscribe(
         (response: any) => {
@@ -119,7 +120,7 @@ export class LoginComponent {
   private handleOtpSubmit(response: any, otpPopup: HTMLElement): void {
     const otpInput = otpPopup.querySelector('input');
     const otp = (otpInput as HTMLInputElement).value;
-    const twoFactorUrl = 'http://localhost:8080/api/users/2fa/verify';
+    const twoFactorUrl = `${environment.apiBaseUrl}/api/users/2fa/verify`;
 
     this.http.post(twoFactorUrl, {
       username: this.loginForm.get('username')?.value,

@@ -15,6 +15,7 @@ import { NotificationService } from '../../services/NotificationService';
 import { ReportComponent } from '../report/report.component';
 import * as XLSX from 'xlsx';
 import * as Filesaver from 'file-saver';
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-notifications',
   imports: [FormsModule,CommonModule,HttpClientModule,HeaderComponent,FooterComponent,FilterPipe,NgChartsModule,MarqueeComponent],
@@ -33,10 +34,18 @@ export class NotificationsComponent {
   activeFunction:string ='list';
   selectedCve: any = null;
   displayedData: any[] = [];
+  heading: string = '';
+  subheading: string = '';
+  infoBox: string = '';
   constructor(private router: Router, private http: HttpClient, private loadingService: LoadingService) {
     
-    const navigation = this.router.getCurrentNavigation();
-    this.vulnerabilities = navigation?.extras.state?.['vulnerabilities'] || [];
+    const navState = this.router.getCurrentNavigation()?.extras.state;
+  if (navState) {
+    this.vulnerabilities = navState['vulnerabilities'] || [];
+    this.heading = navState['heading'] || 'Default Heading';
+    this.subheading = navState['subheading'] || '';
+    this.infoBox = navState['infoBox'] || '';
+  }
     console.log(this.vulnerabilities);
     this.calculatePagination();
   }
@@ -50,7 +59,7 @@ export class NotificationsComponent {
     console.log("v=",v);
     this.selectedCve = structuredClone(v);
     console.log("selecred",this.selectedCve);
-    this.http.get(`http://localhost:8080/api/vulnerabilities/mitigations/${v.cveId}`, {
+    this.http.get(`${environment.apiBaseUrl}/api/vulnerabilities/mitigations/${v.cveId}`, {
       responseType: 'text' as 'json'
     }).subscribe(
       (value) => {
@@ -77,7 +86,7 @@ export class NotificationsComponent {
       return;
     }
   
-    const apiUrl = `http://localhost:8080/api/notifications/delete-cve?userName=${sessionStorage.getItem("username")}`;
+    const apiUrl = `${environment.apiBaseUrl}/api/notifications/delete-cve?userName=${sessionStorage.getItem("username")}`;
   
     this.http.request('DELETE', apiUrl, {
       body: selectedCveIds,
@@ -86,12 +95,9 @@ export class NotificationsComponent {
       (response) => {
         alert(response);
   
-        // ✅ Remove deleted vulnerabilities from the local list
         this.vulnerabilities = this.vulnerabilities.filter(
           (v: any) => !selectedCveIds.includes(v.cveId)
         );
-  
-        // ✅ Recalculate pagination and displayed data
         this.calculatePagination();
       },
       (error) => {

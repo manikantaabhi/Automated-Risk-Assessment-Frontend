@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common'; // Import CommonModule
 import { HttpClientModule, HttpClient } from '@angular/common/http'; // Import HttpClient
 import { Router } from '@angular/router'; // Import Router
 import { LoadingService } from '../../services/loading.service';
+import { environment } from '../../../environments/environment'; // Import environment configuration
 
 @Component({
   selector: 'app-reset-password',
@@ -73,7 +74,7 @@ export class ResetPasswordComponent {
     this.loadingService.startLoading();
     if (this.isSubmitDisabled) return;
     console.log("submitting");
-    const apiUrl = 'http://localhost:8080/api/users/reset-password'; // Your backend API URL
+    const apiUrl = `${environment.apiBaseUrl}/api/users/reset-password`; // Your backend API URL
 
     // Send the reset password request to the backend
     this.http.put(apiUrl, {

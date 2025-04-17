@@ -365,3 +365,26 @@
     justify-content: center;
     align-items: center;
   }
+
+  @media (max-width: 768px) {
+    .col-md-4 {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+  
+    .container {
+      padding-left: 15px;
+      padding-right: 15px;
+      height: auto;
+    }
+  
+    .feature-box {
+      margin-bottom: 20px;
+      width: auto;
+    }
+  
+    .spacer {
+      margin-top: 30px;
+    }
+  }
+  

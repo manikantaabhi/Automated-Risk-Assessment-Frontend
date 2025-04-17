@@ -9,6 +9,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { FilterPipe } from '../../pipes/filter.pipe';
 import { NgChartsModule } from 'ng2-charts';
 import { MarqueeComponent } from '../marquee/marquee.component';
+import { environment } from '../../../environments/environment';
 
 import * as XLSX from 'xlsx';
 import * as Filesaver from 'file-saver';
@@ -36,7 +37,7 @@ export class HistoryComponent{
     this.fetchHistoryData();
   }
   fetchHistoryData(): void {
-    const apiUrl = 'http://localhost:8080/api/vulnerabilities/history/'+sessionStorage.getItem("username");
+    const apiUrl = `${environment.apiBaseUrl}/api/vulnerabilities/history/`+sessionStorage.getItem("username");
     
 
     this.http.get<any>(apiUrl).subscribe(
@@ -64,7 +65,7 @@ export class HistoryComponent{
     console.log("v=",v);
     this.selectedCve = structuredClone(v);
     console.log("selecred",this.selectedCve);
-    this.http.get(`http://localhost:8080/api/vulnerabilities/mitigations/${v.cveId}`, {
+    this.http.get(`${environment.apiBaseUrl}/api/vulnerabilities/mitigations/${v.cveId}`, {
       responseType: 'text' as 'json'
     }).subscribe(
       (value) => {
@@ -91,7 +92,7 @@ export class HistoryComponent{
       return;
     }
   
-    const apiUrl = `http://localhost:8080/api/vulnerabilities/history/delete?username=${sessionStorage.getItem("username")}`;
+    const apiUrl = `${environment.apiBaseUrl}/api/vulnerabilities/history/delete?username=${sessionStorage.getItem("username")}`;
     
     this.http.request('DELETE', apiUrl, { 
       body: selectedCveIds, 

@@ -44,10 +44,13 @@
       <!-- Scheduling a Job -->
       <div class="col-md-4 d-flex justify-content-center">
         <div class="feature-box shadow-lg p-4 rounded d-flex flex-column align-items-center justify-content-between" style="min-height: 250px;">
-          <i class="icon fas fa-calendar-alt"></i>
+          <i class="icon fas fa-calendar-alt"></i>&nbsp;
+          <span style="color: red; font-size: 2rem;" class="badge badge-danger" *ngIf="vulnerabilitiesCount > 0">{{ vulnerabilitiesCount }}</span>
+          
           <h3 class="text-success">Schedule a Job</h3>
           <p>Set up automated security scans.</p>
           <button (click)="scheduleJob()">Schedule</button>
+          <button (click)="ViewVulnerabilities()">View</button>
         </div>
       </div>
   

@@ -16,6 +16,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { JobSchedulingComponent } from './components/job-scheduling/job-scheduling.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -74,6 +75,10 @@ export const routes: Routes = [
   },
   { path: 'notifications', 
     component: NotificationsComponent,
+    canActivate: [authGuard]
+  },
+  { path: 'schedule', 
+    component: JobSchedulingComponent,
     canActivate: [authGuard]
   },
 
