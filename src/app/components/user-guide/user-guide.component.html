@@ -1,45 +1,58 @@
+<app-header (serviceSelected)="highlightService($event)"></app-header>
 <div class="user-guide-container">
-    <div class="guide-header">
-      <h1>User Guide: NVD Dashboard</h1>
-      <p class="guide-subtitle">Learn how to use all the features effectively</p>
+  <div class="guide-header">
+    <h1>User Guide: NVD Dashboard</h1>
+    <p class="guide-subtitle">Understand the core features and how to use them effectively</p>
+  </div>
+
+  <div class="guide-section" *ngFor="let section of [
+    'Uploading Organization Data',
+    'Check Vulnerabilities',
+    'Real-Time Vulnerability Notifications',
+    'Generate Vulnerability Reports',
+    'Saved History',
+    'Job Scheduling (Auto Scans)'
+  ]; let i = index">
+    <div class="section-header" (click)="toggleSection(i)">
+      <h2>{{ section }}</h2>
+      <span class="toggle-icon">{{ expandedSections[i] ? '🔼' : '🔽' }}</span>
     </div>
-  
-    <div class="guide-section" *ngFor="let section of [
-      'Uploading Organization Data',
-      'Real-Time Vulnerability Notifications',
-      'Software Inventory',
-      'CVE Details'
-    ]; let i = index">
-      <div class="section-header" (click)="toggleSection(i)">
-        <h2>{{ section }}</h2>
-        <span class="toggle-icon">{{ expandedSections[i] ? '🔼' : '🔽' }}</span>
-      </div>
-      <div class="section-content" *ngIf="expandedSections[i]">
-        <ng-container [ngSwitch]="i">
-          <p *ngSwitchCase="0">
-            Click on the <strong>“Upload Organization Data”</strong> button in the navbar.
-            Select an Excel file (.xlsx) with Vendor, Product, and Version columns.
-            On upload, your data is securely stored in the backend.
-          </p>
-  
-          <p *ngSwitchCase="1">
-            The system checks the NVD database every 2–5 minutes. If a vulnerability matches
-            your uploaded software, a notification will appear with CVE details like severity
-            and mitigation advice.
-          </p>
-  
-          <p *ngSwitchCase="2">
-            Navigate to the <strong>Software Inventory</strong> tab to see all uploaded entries.
-            Use filters to find software by vendor, product, or version.
-          </p>
-  
-          <p *ngSwitchCase="3">
-            Click a vulnerability to see details like CVSS score, attack vector, description,
-            and published date. Stay informed and secure.
-          </p>
-  
-        </ng-container>
-      </div>
+
+    <div class="section-content" *ngIf="expandedSections[i]">
+      <ng-container [ngSwitch]="i">
+
+        <p *ngSwitchCase="0">
+          Use this feature to upload a list of your organization’s products so the system can monitor them for known vulnerabilities.
+          Uploading your data ensures that future scans and notifications are tailored to your environment.
+        </p>
+
+        <p *ngSwitchCase="1">
+          Search for vulnerabilities by entering product details or uploading a file. 
+          Use filters like date range, type, and keywords to narrow down results.
+          This helps you quickly identify relevant security risks across your software, hardware, or operating systems.
+        </p>
+
+        <p *ngSwitchCase="2">
+          Stay informed with automatic alerts for any new vulnerabilities related to your uploaded products.
+          You’ll be notified when new threats arise, so you can take timely action to protect your assets.
+        </p>
+
+        <p *ngSwitchCase="3">
+          Generate detailed visual reports for specific products and time ranges.
+          Use dynamic bar charts to explore trends and click on any bar to view the exact list of vulnerabilities affecting that period.
+        </p>
+
+        <p *ngSwitchCase="4">
+          Save vulnerabilities that are important to you during checks so you can review them later.
+          This gives you a personalized list of past findings for easy access and tracking.
+        </p>
+
+        <p *ngSwitchCase="5">
+          Set up automatic scans to run periodically based on your uploaded product data.
+          You’ll receive notifications when new vulnerabilities are found—without needing to manually search each time.
+        </p>
+
+      </ng-container>
     </div>
   </div>
-  
+</div>
