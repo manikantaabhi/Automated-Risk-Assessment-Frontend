@@ -4,9 +4,12 @@
 <div class="contact-form">
     <h2>Contact Us</h2>
     <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
-      <input type="text" name="name" [(ngModel)]="formData.name" placeholder="Your Name" required />
-      <input type="email" name="email" [(ngModel)]="formData.email" placeholder="Your Email" required />
-      <textarea name="message" [(ngModel)]="formData.message" placeholder="Your Message" required></textarea>
+      <label for="name">Enter Name</label>
+      <input id="name" type="text" name="name" [(ngModel)]="formData.name" placeholder="Your Name" required />
+      <label for="email">Enter Email</label>
+      <input id="email" type="email" name="email" [(ngModel)]="formData.email" placeholder="Your Email" required />
+      <label for="message">Enter Message</label>
+      <textarea id="message" name="message" [(ngModel)]="formData.message" placeholder="Your Message" required></textarea>
       <button type="submit">Send Message</button>
     </form>
   </div>

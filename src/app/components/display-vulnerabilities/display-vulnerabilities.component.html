@@ -31,6 +31,7 @@
           <th (click)="sortData('version')">Version</th>
           <th (click)="sortData('cveId')">CVE ID</th>
           <th (click)="sortData('metrics.severity')">Severity</th>
+          <th (click)="sortData('metrics.lastModifiedDate')">LastModifiedDate</th>
           <th (click)="sortData('description')">Description <button (click)="downloadExcel()" class="save-btn">Download</button></th>
           <th>Resource Link 
           </th>
@@ -47,6 +48,7 @@
             <a href="" class="link-color" (click)="showDetails(v); $event.preventDefault()">{{ v.cveId }}</a>
           </td>
           <td>{{v.severity}}</td>
+          <td>{{v.lastModifiedDate}}</td>
           <td>{{ v.description }}</td>
           <td>
             <button (click)="toggleDropdown(v)" class="toggle-btn">

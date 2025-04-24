@@ -23,6 +23,7 @@
         <tr>
           <th>Select</th>
           <th (click)="sortData('cveId')">CVE ID</th>
+          <th (click)="sortData('lastModified')">Last Modified Date</th>
           <th (click)="sortData('mitigation')">Description <button (click)="downloadExcel()" class="save-btn">Download</button></th>
           <th>Resource Link</th>
         </tr>
@@ -35,6 +36,7 @@
           <td class="no-wrap">
             <a href="" class="link-color" (click)="showDetails(v); $event.preventDefault()">{{ v.cveId }}</a>
           </td>
+          <td>{{ v.lastModified }}</td>
           <td>{{ v.description }}</td>
           <td>
             <button (click)="toggleDropdown(v)" class="toggle-btn">
