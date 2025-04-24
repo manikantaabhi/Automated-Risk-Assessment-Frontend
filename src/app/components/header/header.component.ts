@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { VulnerabilityPopupComponent } from '../vulnerability-popup/vulnerability-popup.component';
 import { ReportComponent } from '../report/report.component';
 import { environment } from '../../../environments/environment';
+import { NotificationService } from '../../services/NotificationService';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +24,7 @@ export class HeaderComponent {
   lastScrollY = 0;
   isHeaderVisible = true;
 
+  vulnerabilities: any[] = [];
   isMobileMenuOpen = false;
 
 toggleMobileMenu() {
@@ -49,7 +52,7 @@ toggleMobileMenu() {
     return this.isHeaderVisible ? 'show' : '';
   }
 
-  constructor(private router: Router,public dialog: MatDialog, private http: HttpClient) {
+  constructor(private loadingService: LoadingService,private router: Router,public dialog: MatDialog, private http: HttpClient,private notificationService: NotificationService) {
     this.isLoggedIn =true;
     this.username=sessionStorage.getItem("username");
   }
@@ -116,6 +119,35 @@ toggleMobileMenu() {
 
   viewHistory() {
     this.router.navigate(['/history']); // Navigate to HistoryComponent
+  }
+  viewNotifications() {
+    this.loadingService.startLoading();
+    const username = sessionStorage.getItem('username') || '';
+
+    this.notificationService.getAllNotifications(username).subscribe(vulnerabilities => {
+      this.vulnerabilities = vulnerabilities;
+      this.loadingService.stopLoading();
+
+      if (this.vulnerabilities.length > 0) {
+        this.router.navigate(['/notifications'], {
+          state: {
+            vulnerabilities: this.vulnerabilities,
+            heading: 'Vulnerabilities',
+            infoBox: `
+              These vulnerabilities are newly published in the <strong>National Vulnerability Database (NVD)</strong>.
+              Some entries may be generic or not directly tied to your specific products because NVD has not yet provided exact <strong>CPE</strong> matches.
+              Therefore, these vulnerabilities <strong>may or may not affect your systems</strong>.
+            `
+          }
+        });
+        
+      } else {
+        alert('No new notifications!');
+      }
+    });
+  }
+  scheduleJob() {
+    this.router.navigate(['/schedule']);
   }
   viewAbout() {
     this.router.navigate(['/about']); // Navigate to HistoryComponent
